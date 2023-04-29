@@ -1,4 +1,4 @@
-package com.example.test_app;
+package com.example.test_app.config;
 
 import java.util.List;
 import java.util.Map;

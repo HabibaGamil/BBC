@@ -1,7 +1,7 @@
 package com.example.test_app.controller;
 
-import com.example.test_app.Properties;
-import com.example.test_app.TestAppConfig;
+import com.example.test_app.config.Properties;
+import com.example.test_app.config.TestAppConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
