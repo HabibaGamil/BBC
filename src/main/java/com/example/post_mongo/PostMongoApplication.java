@@ -9,19 +9,21 @@ import org.json.JSONTokener;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 
 @SpringBootApplication
 public class PostMongoApplication {
 
 
 	public static void main(String[] args)throws Exception {
-		//SpringApplication.run(PostMongoApplication.class, args);
-		int c=0;
+		SpringApplication.run(PostMongoApplication.class, args);
+
 
 
 
@@ -48,22 +50,25 @@ public class PostMongoApplication {
 //			e.printStackTrace();
 //		}
 
-		File file = new File("E:\\SEM 10\\scalable\\post_mongo\\src\\main\\resources\\articleDoc.json");
-		InputStream inputStream = new FileInputStream(file);
-		JSONTokener tokener = new JSONTokener(inputStream);
-		JSONObject jsonObject = new JSONObject(tokener);
-		JSONArray jsonArray = jsonObject.getJSONArray("Article");
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject item = jsonArray.getJSONObject(i);
-			System.out.println(item);
-
-//			String name = item.getString("name");
-//			int age = item.getInt("age");
-//			System.out.println(name + " is " + age + " years old.");
-			c++;
-		}
-		System.out.println(c);
+//		File file = new File("E:\\SEM 10\\scalable\\post_mongo\\src\\main\\resources\\articleDoc.json");
+//		InputStream inputStream = new FileInputStream(file);
+//		JSONTokener tokener = new JSONTokener(inputStream);
+//		JSONObject jsonObject = new JSONObject(tokener);
+//		JSONArray jsonArray = jsonObject.getJSONArray("Article");
+//
+//		for (int i = 0; i < jsonArray.length(); i++) {
+//			JSONObject item = jsonArray.getJSONObject(i);
+//			System.out.println(item);
+//		//	JSONArray jsArray = new JSONArray(item.getJSONArray("sub_category"));
+//		//	System.out.println(jsArray.get(0));
+//			System.out.println(item.getJSONArray("sub_category").get(0));
+//
+////			String name = item.getString("name");
+////			int age = item.getInt("age");
+////			System.out.println(name + " is " + age + " years old.");
+//			c++;
+//		}
+//		System.out.println(c);
 	}
 
 

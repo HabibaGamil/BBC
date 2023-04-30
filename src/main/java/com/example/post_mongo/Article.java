@@ -3,7 +3,7 @@ package com.example.post_mongo;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+
 import java.util.List;
 
 @Data
@@ -13,7 +13,7 @@ public class Article {
     private String title;
     private String published_at;
     private String publisher;
-    private List<String> category;
+    private List<String>  category;
     private List<String> sub_category;
     private List<String> keywords;
     private String description;
@@ -38,5 +38,9 @@ public class Article {
 
     public Article() {
 
+    }
+
+    public void setCategory(List<String> category) {
+        this.category = category;
     }
 }
