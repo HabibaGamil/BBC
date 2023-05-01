@@ -40,12 +40,13 @@ public class TestAppController {
     }
     @GetMapping("/addCommand")
     public String addCommand ()  {
-        System.out.println("In method");
+
         CustomClassLoader myLoader = new CustomClassLoader("/C:/SpringProjects/BBC/test_app/target/classes/",ClassLoader.getSystemClassLoader());
         System.out.println("Loader created");
         try{
             MyCommand old = new MyCommand();
             Class command =  myLoader.loadClass("com.example.test_app.config.MyCommand");
+
             System.out.println("will try to load command");
             Object cmd =  command.newInstance();
             System.out.println("loaded");
