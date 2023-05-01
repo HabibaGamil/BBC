@@ -1,7 +1,6 @@
 package com.example.test_app.config;
 
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
-
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -35,31 +34,19 @@ public class CustomClassLoader extends ClassLoader{
         throw new ClassNotFoundException();
     }
     protected byte[] getClassData( String directory, String name ) throws URISyntaxException, UnsupportedEncodingException {
-        File test = new File(new File(MyCommand.class.getProtectionDomain().getCodeSource().getLocation()
-                .toURI()).getPath());
-        String path = MyCommand.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        String decodedPath = URLDecoder.decode(path, "UTF-8");
-        System.out.println("test file size"+ Long.valueOf((new File( path )).length()).intValue());
-        System.out.println("path is: "+path);
-
         String classFile = directory  + name.replace('.','/') + ".class";
-       // classFile="MyCommand.class";
-        System.out.println("class file "+ classFile);
+
         int classSize = Long.valueOf((new File( classFile )).length()).intValue();
-        System.out.println("class size before "+ classSize);
         byte[] buf = new byte[classSize];
         try {
             FileInputStream filein = new FileInputStream( classFile );
-            System.out.println("file in"+ filein);
             classSize = filein.read ( buf );
-            System.out.println("class size after"+ classSize);
             filein.close();
         } catch(FileNotFoundException e){
             return null;
         } catch(IOException e){
             return null;
         }
-        System.out.println("buffer returned!");
         return buf;
     }
 

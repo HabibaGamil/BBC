@@ -3,9 +3,10 @@ package com.example.test_app.config;
 public class MyCommand {
     public MyCommand(){
 
-        System.out.println("New command in system version 4");
+        System.out.println("old command object!");
     }
     public void execute(){
-        System.out.println("Executing command !");
+
+        System.out.println("Executing old command !");
     }
 }
