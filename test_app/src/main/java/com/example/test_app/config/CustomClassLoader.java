@@ -28,7 +28,7 @@ public class CustomClassLoader extends ClassLoader{
     }
    @Override
    public Class loadClass(String name) throws ClassNotFoundException {
-      if(name.equals("com.example.test_app.commands.MyCommand")) {
+      if(name.contains("Command")) {
           return this.findClass(name);
       }
       return super.loadClass(name);
