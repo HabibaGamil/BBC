@@ -11,14 +11,25 @@ import lombok.Setter;
 public class Properties {
 
     private String msg;
-    private String buildVersion;
-    private Map<String, String> cmdMap;
-    private List<String> activeBranches;
+    private Map<String, Class> cmdMap;
 
-    public Properties(String msg, Map<String, String> cmdMap) {
+
+    public Properties(String msg, Map<String, String> cmdMapInput) throws ClassNotFoundException {
         this.msg = msg;
-        this.cmdMap=cmdMap;
-
+        for (String key : cmdMapInput.keySet()){
+            String className= cmdMapInput.get(key);
+            Class c = Class.forName(className);
+            cmdMap.put(key,c);
+        }
+    }
+    public void addCommand (String action, Class c){
+        cmdMap.put(action,c);
+    }
+    public void updateCommand (String action, Class c){
+        cmdMap.put(action,c);
+    }
+    public void deleteCommand(String action){
+        cmdMap.remove(action);
     }
 
 }

@@ -30,9 +30,10 @@ import java.util.jar.JarFile;
 public class TestAppController {
     @Autowired
     TestAppConfig testConfig;
+    Properties classProperties;
 
     @GetMapping("/testapp/properties")
-    public String getPropertyDetails() throws JsonProcessingException {
+    public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         Properties properties = new Properties(testConfig.getMsg(),testConfig.getCmdMap());
         String jsonStr = ow.writeValueAsString(properties);
@@ -49,6 +50,7 @@ public class TestAppController {
 
             System.out.println("will try to load command");
             Object cmd =  command.newInstance();
+            MyCommand command2 = new MyCommand();
             System.out.println("loaded");
 
         }catch(Exception e){

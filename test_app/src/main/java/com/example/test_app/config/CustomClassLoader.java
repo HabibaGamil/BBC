@@ -17,7 +17,7 @@ public class CustomClassLoader extends ClassLoader{
         this.path=path;
     }
 
-    public synchronized Class findClass(String name ) throws ClassNotFoundException
+    public synchronized Class findClass(String name) throws ClassNotFoundException
     {
         System.out.println("was in find Class");
         byte[] buf = new byte[0];
@@ -32,9 +32,7 @@ public class CustomClassLoader extends ClassLoader{
         }
         System.out.println("buffer length :  "+buf.length);
         if ( buf != null ){
-            System.out.println("name in define class: "+ name);
             Class c = defineClass( name, buf, 0, buf.length );
-            System.out.println("finished Define Class");
             resolveClass(c);
             return c;
         }
@@ -43,19 +41,19 @@ public class CustomClassLoader extends ClassLoader{
     }
    @Override
    public Class loadClass(String name) throws ClassNotFoundException {
-      if(name.equals("MyCommand"))
-         return this.findClass(name);
+      if(name.equals("com.example.test_app.config.MyCommand")) {
+          return this.findClass(name);
+      }
       return super.loadClass(name);
-
    }
     protected byte[] getClassData( String directory, String name ) throws URISyntaxException, UnsupportedEncodingException {
         System.out.println("in getClassData");
         String classFile = directory  + name.replace('.','/') + ".class";
 
         int classSize = Long.valueOf((new File( classFile )).length()).intValue();
-        System.out.println("classFile" +classFile);
-        System.out.println("class size is :"+ classSize);
-        System.out.println("string name input "+ name);
+//        System.out.println("classFile" +classFile);
+//        System.out.println("class size is :"+ classSize);
+//        System.out.println("string name input "+ name);
         byte[] buf = new byte[classSize];
         try {
             FileInputStream filein = new FileInputStream( classFile );
