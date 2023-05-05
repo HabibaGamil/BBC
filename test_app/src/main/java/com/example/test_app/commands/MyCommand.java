@@ -1,4 +1,4 @@
-package com.example.test_app.config;
+package com.example.test_app.commands;
 
 public class MyCommand {
     public MyCommand(){
