@@ -16,7 +16,6 @@
 	<modules>
 		<module>test_app</module>
 		<module>configServer</module>
-		<module>controller</module>
 	</modules>
 	<name>BBC</name>
 	<description>Scalable Project</description>
