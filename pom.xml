@@ -17,6 +17,7 @@
 		<module>test_app</module>
 		<module>configServer</module>
 		<module>eurekaserver</module>
+		<module>apiGatewayServer</module>
 	</modules>
 	<name>BBC</name>
 	<description>Scalable Project</description>
@@ -34,6 +35,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
 	</dependencies>
 
 	<build>
