@@ -1,5 +1,6 @@
 package com.example.test_app.controller;
 
+import com.example.test_app.commands.DummyCommand;
 import com.example.test_app.config.Properties;
 import com.example.test_app.config.Config;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @EnableAutoConfiguration
-@RefreshScope // important
 public class TestAppController {
     @Autowired
     Config config;
