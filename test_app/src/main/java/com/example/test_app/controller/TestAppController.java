@@ -60,6 +60,15 @@ public class TestAppController {
        return "command added";
 
     }
+//    @Component
+//    public class Receiver {
+//        private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
+//        @RabbitListener(queues = "test")
+//        public void receiveMessage(String message) {
+//            LOGGER.info("Received message: {}", message);
+//        }
+//    }
+
 //    @PostMapping("/updateClass")
 //    @ResponseBody
 //    public String updateClass(@RequestParam String className, @RequestParam String directory){
