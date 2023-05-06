@@ -10,6 +10,6 @@ public class Receiver {
     // private static final Logger LOGGER = LoggerFactory.getLogger(Receiver.class);
     @RabbitListener(queues = "test")
     public void receiveMessage(String message) {
-        System.out.println("I got a message!!!");
+        System.out.println();
     }
 }

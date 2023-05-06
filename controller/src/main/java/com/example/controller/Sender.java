@@ -2,8 +2,6 @@ package com.example.controller;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
-
-
 @Component
 public class Sender {
     private final RabbitTemplate rabbitTemplate;
