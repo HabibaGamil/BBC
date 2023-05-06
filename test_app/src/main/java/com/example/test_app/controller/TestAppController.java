@@ -8,6 +8,7 @@ import com.example.test_app.config.TestAppConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class TestAppController {
     @Autowired
     TestAppConfig testConfig;
+
+    @Value("${server.instance.id}")
+    String instanceId;
+    @GetMapping("/hello")
+    public String hello() {
+        return String.format("Hello from instance %s", instanceId);
+    }
 
     @GetMapping("/testapp/properties")
     public String getPropertyDetails() throws JsonProcessingException {
@@ -47,6 +55,7 @@ public class TestAppController {
        return "command added";
 
     }
+
 
 
 }
