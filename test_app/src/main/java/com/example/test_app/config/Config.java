@@ -10,11 +10,12 @@ import lombok.ToString;
 
 import java.util.Map;
 
+@RefreshScope // important
 @Configuration
 @ConfigurationProperties(prefix = "testapp")
-@RefreshScope // important
 @Getter @Setter @ToString
-public class TestAppConfig {
+public class Config {
     private String msg;
     private Map<String, String> cmdMap;
+    private Map<String, String> modifiableClasses;
 }

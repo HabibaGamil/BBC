@@ -2,16 +2,14 @@ package com.example.test_app.controller;
 
 import com.example.test_app.config.CustomClassLoader;
 import com.example.test_app.config.Properties;
-import com.example.test_app.config.TestAppConfig;
+import com.example.test_app.config.Config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
@@ -19,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RefreshScope // important
 public class TestAppController {
     @Autowired
-    TestAppConfig testConfig;
+    Config config;
+    Properties classProperties;
 
     @Value("${server.instance.id}")
     String instanceId;
@@ -29,30 +28,13 @@ public class TestAppController {
     }
 
     @GetMapping("/testapp/properties")
-    public String getPropertyDetails() throws JsonProcessingException {
+    public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        Properties properties = new Properties(testConfig.getMsg(),testConfig.getCmdMap());
+        Properties properties = new Properties(config.getMsg(),config.getCmdMap(),config.getModifiableClasses());
         String jsonStr = ow.writeValueAsString(properties);
         return jsonStr;
     }
-    @GetMapping("/addCommand")
-    public String addCommand ()  {
-        System.out.println("In method");
-        CustomClassLoader myLoader = new CustomClassLoader("/C:/SpringProjects/BBC/test_app/target/classes/",ClassLoader.getSystemClassLoader());
-        System.out.println("Loader created");
-        try{
-          Class command =  myLoader.loadClass("com.example.test_app.config.NewCommand");
-            System.out.println("will try to load command");
-          Object cmd =  command.newInstance();
-            System.out.println("loaded");
 
-        }catch(Exception e){
-            System.out.println(e);
-            return "class not found";
-        }
-       return "command added";
-
-    }
 
 
 
