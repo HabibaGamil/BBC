@@ -27,8 +27,8 @@ public class TestAppController {
     }
 
     @GetMapping("/hello")
-    public void hello() {
-       System.out.println("Hello");
+    public String  hello() {
+       return "Hello";
     }
 
 
