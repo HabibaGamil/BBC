@@ -1,8 +1,6 @@
 package com.example.test_app.controller;
 
-import com.example.test_app.TestAppApplication;
 import com.example.test_app.config.CustomClassLoader;
-import com.example.test_app.config.MyCommand;
 import com.example.test_app.config.Properties;
 import com.example.test_app.config.TestAppConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
