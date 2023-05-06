@@ -20,19 +20,17 @@ public class TestAppController {
     Config config;
     Properties classProperties;
 
-    @Value("${server.instance.id}")
-    String instanceId;
-    @GetMapping("/hello")
-    public String hello() {
-        return String.format("Hello from instance %s", instanceId);
-    }
-
     @GetMapping("/testapp/properties")
     public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         Properties properties = new Properties(config.getMsg(),config.getCmdMap(),config.getModifiableClasses());
         String jsonStr = ow.writeValueAsString(properties);
         return jsonStr;
+    }
+
+    @GetMapping("/hello")
+    public void hello() {
+       System.out.println("Hello");
     }
 
 
