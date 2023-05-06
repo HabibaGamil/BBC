@@ -16,7 +16,8 @@
 	<modules>
 		<module>test_app</module>
 		<module>configServer</module>
-		<module>eurekaServer</module>
+		<module>eurekaserver</module>
+		<module>apiGatewayServer</module>
 		<module>controller</module>
 	</modules>
 	<name>BBC</name>
@@ -35,6 +36,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
 	</dependencies>
 
 	<build>

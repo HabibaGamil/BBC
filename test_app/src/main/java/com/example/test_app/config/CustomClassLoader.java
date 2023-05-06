@@ -10,29 +10,16 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 
 public class CustomClassLoader extends ClassLoader{
-    String path;
-    public CustomClassLoader(String path, ClassLoader parent){
+    byte [] bytes;
+    public CustomClassLoader(ClassLoader parent, byte [] bytes){
         super(parent);
-        System.out.println("My custom loader");
-        this.path=path;
-    }
+        this.bytes=bytes;
 
-    public synchronized Class findClass(String name) throws ClassNotFoundException
+    }
+    public synchronized Class findClass(String name ) throws ClassNotFoundException
     {
-        System.out.println("was in find Class");
-        byte[] buf = new byte[0];
-        try {
-            buf = getClassData( path, name );
-        } catch (URISyntaxException e) {
-            System.out.println(e);
-            throw new RuntimeException(e);
-        } catch (UnsupportedEncodingException e) {
-            System.out.println(e);
-            throw new RuntimeException(e);
-        }
-        System.out.println("buffer length :  "+buf.length);
-        if ( buf != null ){
-            Class c = defineClass( name, buf, 0, buf.length );
+        if ( bytes != null ){
+            Class c = defineClass( name, bytes, 0, bytes.length );
             resolveClass(c);
             return c;
         }
@@ -41,33 +28,12 @@ public class CustomClassLoader extends ClassLoader{
     }
    @Override
    public Class loadClass(String name) throws ClassNotFoundException {
-      if(name.equals("com.example.test_app.config.MyCommand")) {
+      if(name.contains("Command")) {
           return this.findClass(name);
       }
       return super.loadClass(name);
    }
-    protected byte[] getClassData( String directory, String name ) throws URISyntaxException, UnsupportedEncodingException {
-        System.out.println("in getClassData");
-        String classFile = directory  + name.replace('.','/') + ".class";
 
-        int classSize = Long.valueOf((new File( classFile )).length()).intValue();
-//        System.out.println("classFile" +classFile);
-//        System.out.println("class size is :"+ classSize);
-//        System.out.println("string name input "+ name);
-        byte[] buf = new byte[classSize];
-        try {
-            FileInputStream filein = new FileInputStream( classFile );
-            classSize = filein.read ( buf );
-            filein.close();
-        } catch(FileNotFoundException e){
-            System.out.println("file not found exception");
-            return null;
-        } catch(IOException e){
-            System.out.println("IO exception");
-            return null;
-        }
-        return buf;
-    }
 
 }
 
