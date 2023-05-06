@@ -1,12 +1,10 @@
 package com.example.test_app.controller;
 
-import com.example.test_app.config.CustomClassLoader;
 import com.example.test_app.config.Properties;
 import com.example.test_app.config.Config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +30,6 @@ public class TestAppController {
     public void hello() {
        System.out.println("Hello");
     }
-
 
 
 

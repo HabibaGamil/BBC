@@ -15,7 +15,7 @@ public class CustomClassLoader extends ClassLoader{
         this.bytes=bytes;
 
     }
-    public synchronized Class findClass(String name ) throws ClassNotFoundException
+    public synchronized Class findClass(String name) throws ClassNotFoundException
     {
         if ( bytes != null ){
             Class c = defineClass( name, bytes, 0, bytes.length );
@@ -27,7 +27,7 @@ public class CustomClassLoader extends ClassLoader{
     }
    @Override
    public Class loadClass(String name) throws ClassNotFoundException {
-      if(name.contains("Command")) {
+      if(name.contains("Command") ) {
           return this.findClass(name);
       }
       return super.loadClass(name);
