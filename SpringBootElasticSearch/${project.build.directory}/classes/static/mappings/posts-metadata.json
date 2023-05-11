@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "postMetadataId": {
+      "type" : "long"
+    },
+    "title": {
+      "type" : "text"
+    },
+    "summary": {
+      "type": "text"
+    }
+
+  }
+}
