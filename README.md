@@ -1,5 +1,5 @@
 # BBC
-BBC Replica
+
 Directory app is responsible for retrieving post metadatas that belong to certain categories/ subcategories/ topics. 
 Furthermore, it is used to obtain information about each category, such as its name and the subcategories falling under it. 
 Similarily, it is used to obtain information about each subcategory and topic. 
