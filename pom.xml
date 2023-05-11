@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>test_app</module>
+		<module>directory_app</module>
 	</modules>
 	<name>BBC</name>
 	<description>Scalable Project</description>
