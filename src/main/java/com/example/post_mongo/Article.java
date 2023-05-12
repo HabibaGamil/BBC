@@ -43,6 +43,7 @@ public class Article {
 
     }
 
+
     public void setCategory(List<String> category) {
         this.category = category;
     }
