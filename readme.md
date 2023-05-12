@@ -19,9 +19,6 @@
     - The Post Service sends an event when there is an important post that should be posted.
     - The Generate Service updates the cache with the information taken from the event.
 
-### Communication with the controller:
-
-    - 
 # Cache:
 
     - In this service, we use Redis cache.
@@ -30,7 +27,6 @@
         - Sub_Categories_repository which contains sub_categories metadata
         - Topics_repository which contains topics metadata
     - we also created a redis hash which will contains the new posts 
-# Database:
 
 # Running the service:
  - you have to follow the following steps:
