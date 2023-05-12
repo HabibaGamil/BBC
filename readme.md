@@ -31,3 +31,9 @@
         - Topics_repository which contains topics metadata
     - we also created a redis hash which will contains the new posts 
 # Database:
+
+# Running the service:
+ - you have to follow the following steps:
+    - Download redis server from https://github.com/microsoftarchive/redis/releases
+    - Open the server from redis-server application
+    - Run LastdemoMavenApplication class
