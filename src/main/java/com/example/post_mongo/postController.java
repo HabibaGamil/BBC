@@ -91,6 +91,12 @@ public class postController {
             }
             a.setKeywords(tmp3);
 
+            List<String> tmp4=new ArrayList<>();
+            for (int j = 0; j < item.getJSONArray("topics").length(); j++) {
+                String var = (String) item.getJSONArray("topics").get(j);
+                tmp4.add(var);
+            }
+            a.setTopics(tmp4);
 
             a.setDescription(item.getString("description"));
             a.setContent(item.getString("content"));

@@ -2,8 +2,6 @@ package com.example.post_mongo;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,10 @@ public class Article {
     private List<String>  category;
     private List<String> sub_category;
     private List<String> keywords;
+
+    private List<String> topics;
+
+    private int viewCount;
     private String description;
     private String content;
     private String url;
@@ -25,18 +27,20 @@ public class Article {
 
 
 
-    public Article(String title, String published_at, String publisher, List<String> category, List<String> sub_category, List<String> keywords, String description, String content, String url, ArrayList<String> images_id, ArrayList<String> videos_id) {
+    public Article(String title, String published_at, String publisher, List<String> category, List<String> sub_category, List<String> keywords, List<String> topics, String description, String content, String url, ArrayList<String> images_id, ArrayList<String> videos_id) {
         this.title = title;
         this.published_at = published_at;
         this.publisher = publisher;
         this.category = category;
         this.sub_category = sub_category;
         this.keywords = keywords;
+        this.topics = topics;
         this.description = description;
         this.content = content;
         this.url = url;
         this.images_id = images_id;
         this.videos_id= videos_id;
+        this.viewCount = 0;
     }
 
     public Article() {
