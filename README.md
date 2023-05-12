@@ -7,6 +7,7 @@ BBC Replica for Architecture of Massively Scalable Apps Course
 -Media APP <br>
 -Search App <br>
 -Directory App <br>
+-Views App <br>
 -Newfeed Generator App <br>
 -Newsfeed App <br>
 
