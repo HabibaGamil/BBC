@@ -14,6 +14,9 @@
 	<modules>
 		<module>test_app</module>
 	</modules>
+	<modules>
+		<module>views</module>
+	</modules>
 	<name>BBC</name>
 	<description>Scalable Project</description>
 	<properties>
