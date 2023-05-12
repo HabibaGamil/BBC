@@ -2,6 +2,7 @@ package com.example.lastdemoMaven;
 
 
 import com.example.lastdemoMaven.config.RedisConfig;
+import com.example.lastdemoMaven.controller.Post_Controller;
 import com.example.lastdemoMaven.model.hash_key;
 import com.example.lastdemoMaven.model.meta_data;
 import com.example.lastdemoMaven.repository.categories_repository;
@@ -46,6 +47,17 @@ public class LastdemoMavenApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LastdemoMavenApplication.class, args);
+//		Post_Controller pc = new Post_Controller();
+//		String[] array12 = new String[] {"312"};
+//		String[] array1 = new String[] {"news"};
+//		meta_data m = new meta_data("12","ma","123","2",array12,array1,"123","2","news");
+//		meta_data c = new meta_data("12","ma","123","2",array12,array1,"123","2","news");
+//		Map<String,Object> mmd= new HashMap<>();
+//		mmd.put((new hash_key("meta")).getHash_key(),m);
+//		mmd.put((new hash_key("meta2")).getHash_key(),c);
+//		pc.updatePostHash(mmd);
+//		System.out.println(pc.getPostHash());
+
 //		String[] array12 = new String[] {"312"};
 //		String[] array1 = new String[] {"news"};
 //		RedisConfig rc = new RedisConfig();
