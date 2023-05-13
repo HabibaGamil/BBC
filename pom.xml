@@ -19,6 +19,7 @@
 		<module>eurekaserver</module>
 		<module>apiGatewayServer</module>
 		<module>controller</module>
+		<module>mqServer</module>
 	</modules>
 	<name>BBC</name>
 	<description>Scalable Project</description>

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,10 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RefreshScope // important
 public class TestAppController {
     @Autowired
+
     Config config;
     Properties classProperties;
 
-    @GetMapping("/testapp/properties")
+    @Autowired
+    Environment environment;
+
+    @GetMapping("/user/properties")
     public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         Properties properties = new Properties(config.getMsg(),config.getCmdMap(),config.getModifiableClasses());
@@ -27,10 +32,11 @@ public class TestAppController {
     }
 
     @GetMapping("/hello")
-    public void hello() {
-       System.out.println("Hello");
-    }
+    public String  hello() {
 
+        String port = environment.getProperty("server.port");
+        return "Hello from instance running on port " + port;
+    }
 
 
 }
