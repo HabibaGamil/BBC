@@ -25,7 +25,28 @@ public class GatewayServerApplication {
                         .path("/bbc/testapp/**")
                         .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
                                 .addResponseHeader("X-Response-Time",new Date().toString()))
-                        .uri("lb://mqserver")).build();
+                        .uri("lb://mqserver"))
+                 .route(p -> p
+                        .path("/bbc/post/**")
+                        .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
+                                .addResponseHeader("X-Response-Time",new Date().toString()))
+                        .uri("lb://mqserver"))
+                 .route(p -> p
+                        .path("/bbc/newsfeed/**")
+                        .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
+                                .addResponseHeader("X-Response-Time",new Date().toString()))
+                        .uri("lb://mqserver"))
+                 .route(p -> p
+                        .path("/bbc/search/**")
+                        .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
+                                .addResponseHeader("X-Response-Time",new Date().toString()))
+                        .uri("lb://mqserver"))
+                 .route(p -> p
+                        .path("/bbc/user/**")
+                        .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
+                                .addResponseHeader("X-Response-Time",new Date().toString()))
+                        .uri("lb://mqserver"))
+                  .build();
 
     }
 }
