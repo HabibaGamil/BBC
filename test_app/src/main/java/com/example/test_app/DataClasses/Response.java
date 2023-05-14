@@ -1,4 +1,4 @@
-package com.example.test_app.RabbitMQ;
+package com.example.test_app.DataClasses;
 
 
 import lombok.AllArgsConstructor;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestResponse {
+public class Response {
     String response;
 }
