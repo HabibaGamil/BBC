@@ -10,22 +10,17 @@ public class CustomClassLoader extends ClassLoader{
     public synchronized Class findClass(String name) throws ClassNotFoundException
     {
         if ( bytes != null ){
-            System.out.println("!! He is trying to create the new class!! ");
-            Class c = defineClass( name, bytes, 0, bytes.length );
-            //resolveClass(c);
+            Class c = defineClass( null , bytes, 0, bytes.length );
             return c;
         }
-        System.out.println("!! Can't see bytes !!");
         throw new ClassNotFoundException();
 
     }
    @Override
    public Class loadClass(String name) throws ClassNotFoundException {
       if(name.equals("MyCommand") ) {
-          System.out.println("I am in load class !!");
           return this.findClass(name);
       }
-       System.out.println(" I reached out of if !!");
       return super.loadClass(name);
    }
 

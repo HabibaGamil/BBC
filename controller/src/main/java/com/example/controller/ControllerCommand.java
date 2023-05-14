@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ControllerCommand{
+    String command;
     String actionName;
+    int count;
     byte[] bytes;
 }

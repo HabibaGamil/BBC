@@ -14,20 +14,15 @@ public class RabbitMQConfig {
 
     @Value("${rabbitmq.queue.controller.name}")
     private String controllerQueue;
-
     @Value("${rabbitmq.exchange.controller.name}")
     private String exchange;
-
     @Value("${rabbitmq.binding.routing.key}")
     private String controllerRoutingKey;
-
-
     // spring bean for queue - controller queue
     @Bean
     public Queue controllerQueue(){
         return new Queue(controllerQueue);
     }
-
     // spring bean for exchange
     @Bean
     public TopicExchange exchange(){

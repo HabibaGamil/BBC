@@ -13,9 +13,10 @@ public class BytesLoader {
         //initializing the path through which any new/updates class file will be added (this is the path to the commands folder)
         Path currRelativePath = Paths.get("");
         path = currRelativePath.toAbsolutePath().toString()+ "\\target\\classes\\";
-        path+="com/example/controller/commands/";
+        path+="com\\example\\controller\\commands\\";
         System.out.println(path);
     }
+
     //This method loads the byte code from the file using the specified path
     public byte [] getBytesArray(String name) throws IOException {
 

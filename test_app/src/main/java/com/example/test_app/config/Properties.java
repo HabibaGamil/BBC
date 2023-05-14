@@ -43,6 +43,7 @@ public class Properties {
         cmdMap.put(action,c);
     }
     public void deleteCommand(String action){
+
         cmdMap.remove(action);
     }
     public void updateClass(String action){

@@ -14,20 +14,22 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 @RestController
 @EnableAutoConfiguration
 @RefreshScope // important
 public class TestAppController {
-    @Autowired
-
-    Config config;
-    Properties classProperties;
-    RabbitTemplate rabbitTemplate;
-
-    @Autowired
-    Environment environment;
+     @Autowired
+     Config config;
+     Properties properties ;
+     RabbitTemplate rabbitTemplate;
+     @Autowired
+     Environment environment;
 
     @GetMapping("/user/properties")
     public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
@@ -36,38 +38,22 @@ public class TestAppController {
         String jsonStr = ow.writeValueAsString(properties);
         return jsonStr;
     }
-
+    //these endpoints are for test purposes only
     @GetMapping("/hello")
     public String  hello() {
-
         String port = environment.getProperty("server.port");
         return "Hello from instance running on port " + port;
     }
-    @RabbitListener(queues = "test")
-    public void updateCommand(Message msg) throws ClassNotFoundException {
-        byte [] bytes = msg.getBody();
-        System.out.println("received "+bytes.length);
-        //  ControllerCommand controllerCommand = (ControllerCommand) SerializationUtils.deserialize(bytes);
-        System.out.println(bytes.length);
-        CustomClassLoader loader = new CustomClassLoader(ClassLoader.getSystemClassLoader(), bytes);
-        try
-        {
-            System.out.println("trying to load the class");
-            Class Command = loader.loadClass("MyCommand");
-            System.out.println("Class loaded");
-            Object commandNewInstance = Command.newInstance();
+    @GetMapping("/action")
+    public String  performAction(@RequestParam String actionName) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        Class clss = properties.getCmdMap().get(actionName);
+        Object obj = clss.newInstance();
+        Method execute = clss.getMethod("execute");
+        execute.invoke(obj);
+        return "ok";
 
-        }
-        catch (ClassNotFoundException ex)
-        {
-            System.out.println("Class not found" + ex);
-        } catch (InstantiationException e) {
-            System.out.println("InstantiationException"+ e);
-        } catch (IllegalAccessException e) {
-            System.out.println("IllegalAccessException"+e);
-        }
-        System.out.println("Received!!!!!!!!!!!! ");
     }
+
 
 
 }

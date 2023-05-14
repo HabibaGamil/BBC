@@ -1,13 +1,13 @@
 package com.example.controller.commands;
 
-public class MyCommand implements Command{
+public class MyCommand {
     public MyCommand(){
 
-        System.out.println("Old Command Object!!!!!!!!!!!!!");
+        System.out.println("New My Command Object!");
 
     }
     public void execute(){
 
-        System.out.println("Executing Old command !");
+        System.out.println("Executing My Command Object!");
     }
 }

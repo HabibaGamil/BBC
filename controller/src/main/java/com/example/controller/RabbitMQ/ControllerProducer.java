@@ -10,15 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ControllerProducer {
-
     private Logger LOGGER = LoggerFactory.getLogger(ControllerProducer.class);
-
     @Value("${rabbitmq.exchange.controller.name}")
     private String exchange;
-
     @Value("${rabbitmq.binding.routing.key}")
     private String controllerRoutingKey;
-
 
     private RabbitTemplate rabbitTemplate;
 

@@ -7,11 +7,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @RefreshScope // important
 @Configuration
+@Component
 @ConfigurationProperties(prefix = "testapp")
 @Getter @Setter @ToString
 public class Config {
