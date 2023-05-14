@@ -23,7 +23,7 @@ public class GatewayServerApplication {
         return builder.routes()
                 .route(p -> p
                         .path("/bbc/testapp/**")
-                        .filters(f -> f.rewritePath("/bbc/testapp/(?<segment>.*)","/${segment}")
+                        .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
                                 .addResponseHeader("X-Response-Time",new Date().toString()))
                         .uri("lb://mqserver")).build();
 
