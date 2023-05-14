@@ -35,7 +35,8 @@ public class Producer {
     public Response sendMessage(Request req,String app){
         LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", req.toString()));
 
-        String routingKey = rabbitMQConfig.getRoutingKeyMap().get(app);
+       // String routingKey = rabbitMQConfig.getRoutingKeyMap().get(app);
+        String routingKey = rabbitMQConfig.getMqServer_testAppRoutingKey();
         // send a command to test app controller queue
         LOGGER.info(String.format("Routing key => %s", routingKey));
         Response response = rabbitTemplate.convertSendAndReceiveAsType(exchange, routingKey, req, new ParameterizedTypeReference<>() {

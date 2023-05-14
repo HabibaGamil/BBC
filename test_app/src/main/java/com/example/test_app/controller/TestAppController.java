@@ -31,28 +31,20 @@ public class TestAppController {
      @Autowired
      Environment environment;
 
-    @GetMapping("/user/properties")
+    @GetMapping("/app/properties")
     public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         Properties properties = new Properties(config.getMsg(),config.getCmdMap(),config.getModifiableClasses());
         String jsonStr = ow.writeValueAsString(properties);
         return jsonStr;
     }
-    //these endpoints are for test purposes only
+
     @GetMapping("/hello")
     public String  hello() {
         String port = environment.getProperty("server.port");
         return "Hello from instance running on port " + port;
     }
-    @GetMapping("/action")
-    public String  performAction(@RequestParam String actionName) throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        Class clss = properties.getCmdMap().get(actionName);
-        Object obj = clss.newInstance();
-        Method execute = clss.getMethod("execute");
-        execute.invoke(obj);
-        return "ok";
 
-    }
 
 
 

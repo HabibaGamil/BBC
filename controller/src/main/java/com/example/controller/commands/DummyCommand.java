@@ -6,6 +6,6 @@ public class DummyCommand{
     }
 
     public void execute() {
-        System.out.println("Executing Dummy Command!");
+        System.out.println("Executing Dummy Command Updated!");
     }
 }
