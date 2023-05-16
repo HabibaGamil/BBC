@@ -12,21 +12,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.queue.controller.name}")
-    private String controllerQueue;
-    @Value("${rabbitmq.exchange.controller.name}")
+    @Value("${rabbitmq.exchange.controllerServer.name}")
     private String exchange;
-    @Value("${rabbitmq.binding.routing.key}")
-    private String controllerRoutingKey;
-    // spring bean for queue - controller queue
     @Bean
-    public Queue controllerQueue(){
-        return new Queue(controllerQueue);
+    public Queue controllerQueue() {
+        return new AnonymousQueue();
     }
-    // spring bean for exchange
+
     @Bean
-    public TopicExchange exchange(){
-        return new TopicExchange(exchange);
+    public FanoutExchange fanout() {
+        return new FanoutExchange(exchange);
     }
 
     // spring bean for binding between exchange and queue using routing key
@@ -34,8 +29,7 @@ public class RabbitMQConfig {
     public Binding binding(){
         return BindingBuilder
                 .bind(controllerQueue())
-                .to(exchange())
-                .with(controllerRoutingKey);
+                .to(fanout());
     }
     // message converter
     @Bean

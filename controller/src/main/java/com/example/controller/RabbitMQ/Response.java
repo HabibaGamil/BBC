@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestResponse {
+public class Response {
     String response;
 }

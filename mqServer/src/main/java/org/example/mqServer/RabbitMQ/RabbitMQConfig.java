@@ -13,34 +13,57 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 
 @RefreshScope // important
 @Configuration
+@Component
 @ConfigurationProperties(prefix = "mqserver")
 @Getter @Setter @ToString
 public class RabbitMQConfig {
 
     private Map<String, String> routingKeyMap;
     private Map<String, String> queueMap;
-    //private Map<String, String> exchangeMap;
 
-    @Value("${rabbitmq.queue.mqServer_testApp.name}")
-    private String mqServer_testAppQueue;
 
     @Value("${rabbitmq.exchange.mqServer.name}")
     private String exchange;
 
-    @Value("${rabbitmq.binding.mqServer_testApp.routing.key}")
-    private String mqServer_testAppRoutingKey;
-
-
-    // spring bean for queue - testApp queue
+    ///////////////////////// Queues Beans /////////////////
     @Bean
     public Queue mqServer_testAppQueue(){
-        return new Queue(queueMap.get("testApp"));
+        return new Queue(queueMap.get("testapp"));
+    }
+    @Bean
+    public Queue mqServer_postsQueue(){
+        return new Queue(queueMap.get("posts"));
+    }
+    @Bean
+    public Queue mqServer_newsfeedQueue(){
+        return new Queue(queueMap.get("newsfeed"));
+    }
+    @Bean
+    public Queue mqServer_searchQueue(){
+        return new Queue(queueMap.get("search"));
+    }
+    @Bean
+    public Queue mqServer_userQueue() {
+        return new Queue(queueMap.get("user"));
+    }
+    @Bean
+    public Queue mqServer_viewsQueue() {
+        return new Queue(queueMap.get("views"));
+    }
+    @Bean
+    public Queue mqServer_directoryQueue() {
+        return new Queue(queueMap.get("directory"));
+    }
+    @Bean
+    public Queue mqServer_mediaQueue() {
+        return new Queue(queueMap.get("media"));
     }
 
     // spring bean for exchange
@@ -49,13 +72,62 @@ public class RabbitMQConfig {
         return new TopicExchange(exchange);
     }
 
-    // spring bean for binding between exchange and queue using routing key
+    // spring bean for binding between exchange and queue using routing key //
     @Bean
-    public Binding binding(){
+    public Binding testAppBinding(){
         return BindingBuilder
                 .bind(mqServer_testAppQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("testApp"));
+                .with(routingKeyMap.get("testapp"));
+    }
+    @Bean
+    public Binding postsBinding(){
+        return BindingBuilder
+                .bind(mqServer_postsQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("posts"));
+    }
+    @Bean
+    public Binding newsfeedBinding(){
+        return BindingBuilder
+                .bind(mqServer_newsfeedQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("newsfeed"));
+    }
+    @Bean
+    public Binding searchBinding(){
+        return BindingBuilder
+                .bind(mqServer_searchQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("search"));
+    }
+    @Bean
+    public Binding userBinding(){
+        return BindingBuilder
+                .bind(mqServer_userQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("user"));
+    }
+    @Bean
+    public Binding viewsBinding(){
+        return BindingBuilder
+                .bind(mqServer_viewsQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("views"));
+    }
+    @Bean
+    public Binding directoryBinding(){
+        return BindingBuilder
+                .bind(mqServer_directoryQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("directory"));
+    }
+    @Bean
+    public Binding mediaBinding(){
+        return BindingBuilder
+                .bind(mqServer_mediaQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("media"));
     }
     // message converter
     @Bean

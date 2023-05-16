@@ -1,46 +1,67 @@
 package com.example.controller.RabbitMQ;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
+@RefreshScope // important
 @Configuration
+@Component
+@ConfigurationProperties(prefix = "controller")
+@Getter
+@Setter
+@ToString
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.queue.controller.name}")
-    private String controllerQueue;
-
-    @Value("${rabbitmq.exchange.controller.name}")
-    private String exchange;
-
-    @Value("${rabbitmq.binding.routing.key}")
-    private String controllerRoutingKey;
+    private Map<String, String> exchangeMap;
 
 
-    // spring bean for queue - controller queue
+    // fanout exchange beans
     @Bean
-    public Queue controllerQueue(){
-        return new Queue(controllerQueue);
+    public FanoutExchange test_fanout() {
+        return new FanoutExchange(exchangeMap.get("test"));
+    }
+    @Bean
+    public FanoutExchange posts_fanout() {
+        return new FanoutExchange(exchangeMap.get("posts"));
     }
 
-    // spring bean for exchange
     @Bean
-    public TopicExchange exchange(){
-        return new TopicExchange(exchange);
+    public FanoutExchange newsfeed_fanout() {
+        return new FanoutExchange(exchangeMap.get("newsfeed"));
     }
-
-    // spring bean for binding between exchange and queue using routing key
     @Bean
-    public Binding binding(){
-        return BindingBuilder
-                .bind(controllerQueue())
-                .to(exchange())
-                .with(controllerRoutingKey);
+    public FanoutExchange search_fanout() {
+        return new FanoutExchange(exchangeMap.get("search"));
+    }
+    @Bean
+    public FanoutExchange user_fanout() {
+        return new FanoutExchange(exchangeMap.get("user"));
+    }
+    @Bean
+    public FanoutExchange views_fanout() {
+        return new FanoutExchange(exchangeMap.get("views"));
+    }
+    @Bean
+    public FanoutExchange directory_fanout() {
+        return new FanoutExchange(exchangeMap.get("directory"));
+    }
+    @Bean
+    public FanoutExchange media_fanout() {
+        return new FanoutExchange(exchangeMap.get("media"));
     }
     // message converter
     @Bean

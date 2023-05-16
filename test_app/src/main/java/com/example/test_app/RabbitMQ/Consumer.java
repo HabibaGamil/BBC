@@ -48,11 +48,12 @@ public class Consumer {
             System.out.println(e);
         }
 
-        //LOGGER.info(String.format("Request Received from MQ server => %s", request.toString()));
+        LOGGER.info(String.format("Request Received from MQ server => %s", request.toString()));
         return new Response("The MQ server Request is received to test app, this is the test app response.");
     }
-    @RabbitListener(queues = "${rabbitmq.queue.controller.name}")
-    public Response consume(ControllerCommand controllerCommand){
+
+    @RabbitListener(queues = "#{controllerQueue.name}")
+    public void consume(ControllerCommand controllerCommand){
 
         String command = controllerCommand.getCommand();
         String actionName = controllerCommand.getActionName();
@@ -64,6 +65,7 @@ public class Consumer {
                 CustomClassLoader loader = new CustomClassLoader(ClassLoader.getSystemClassLoader(), bytes);
                 Class c = loader.loadClass("");
                 this.properties.addCommand(actionName,c);
+                LOGGER.info(String.format("I RECIEVED FROM fanout!!"));
 
             }
             if (command.equals("updateCommand")) {
@@ -99,6 +101,5 @@ public class Consumer {
             System.out.println(e);
         }
        // LOGGER.info(String.format("Controller command received in test_app service => %s", controllerCommand.toString()));
-        return new Response("The controller command is received to test app, this is the test app response.");
     }
 }

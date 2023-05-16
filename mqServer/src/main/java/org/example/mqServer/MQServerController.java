@@ -33,20 +33,45 @@ public class MQServerController {
     public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse) {
 
         Request request = new Request(requestParams,headers);
-        Response response = producer.sendMessage(request,app);
-        if(response == null)
-            servletResponse.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
-        return response;
+        Response response = null;
+        try
+        {
+             response = producer.sendMessage(request, app);
+        }
+        catch (Exception ex)
+        {
+            LOGGER.info(ex.getMessage());
+        }
+
+            if(response == null)
+                servletResponse.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+            return response;
+
+
     }
 
     @PostMapping("{app}/{requestParameters}")
     public Response handler(@RequestBody Map<String, Object> body,@PathVariable String requestParameters,@PathVariable String app,
-                                       @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse) {
+                                       @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse)
+    {
         Request request = new Request(requestParameters,body,headers);
-      Response response = producer.sendMessage(request,app);
-        if(response == null)
-            servletResponse.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
-        return response;
+        Response response = null;
+        try
+        {
+            response = producer.sendMessage(request, app);
+        }
+        catch (Exception ex)
+        {
+            LOGGER.info(ex.toString());
+        }
+
+            if(response == null) {
+                servletResponse.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+                LOGGER.info("null");
+            }
+            return response;
+
+
     }
 
 
