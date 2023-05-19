@@ -31,8 +31,10 @@ public class Producer {
 
 
     public Response sendMessage(Request req,String app){
-        LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", req.toString()));
 
+        LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", req.toString()));
+        LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", rabbitMQConfig.getRoutingKeyMap()));
+        LOGGER.info(String.format("app name", app ));
         String routingKey = rabbitMQConfig.getRoutingKeyMap().get(app);
 
         LOGGER.info(String.format("Routing key=> %s", routingKey));

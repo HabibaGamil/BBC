@@ -35,11 +35,11 @@ public class RabbitMQConfig {
     ///////////////////////// Queues Beans /////////////////
     @Bean
     public Queue mqServer_testAppQueue(){
-        return new Queue(queueMap.get("testapp"));
+        return new Queue(queueMap.get("test"));
     }
     @Bean
-    public Queue mqServer_postsQueue(){
-        return new Queue(queueMap.get("posts"));
+    public Queue mqServer_postQueue(){
+        return new Queue(queueMap.get("post"));
     }
     @Bean
     public Queue mqServer_newsfeedQueue(){
@@ -78,14 +78,14 @@ public class RabbitMQConfig {
         return BindingBuilder
                 .bind(mqServer_testAppQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("testapp"));
+                .with(routingKeyMap.get("test"));
     }
     @Bean
-    public Binding postsBinding(){
+    public Binding postBinding(){
         return BindingBuilder
-                .bind(mqServer_postsQueue())
+                .bind(mqServer_postQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("posts"));
+                .with(routingKeyMap.get("post"));
     }
     @Bean
     public Binding newsfeedBinding(){

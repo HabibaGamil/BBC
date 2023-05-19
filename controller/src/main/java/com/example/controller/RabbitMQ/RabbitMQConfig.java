@@ -35,8 +35,8 @@ public class RabbitMQConfig {
         return new FanoutExchange(exchangeMap.get("test"));
     }
     @Bean
-    public FanoutExchange posts_fanout() {
-        return new FanoutExchange(exchangeMap.get("posts"));
+    public FanoutExchange post_fanout() {
+        return new FanoutExchange(exchangeMap.get("post"));
     }
 
     @Bean
