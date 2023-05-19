@@ -35,11 +35,11 @@ public class RabbitMQConfig {
     ///////////////////////// Queues Beans /////////////////
     @Bean
     public Queue mqServer_testAppQueue(){
-        return new Queue(queueMap.get("testapp"));
+        return new Queue(queueMap.get("test"));
     }
     @Bean
-    public Queue mqServer_postsQueue(){
-        return new Queue(queueMap.get("posts"));
+    public Queue mqServer_postQueue(){
+        return new Queue(queueMap.get("post"));
     }
     @Bean
     public Queue mqServer_newsfeedQueue(){
@@ -50,8 +50,8 @@ public class RabbitMQConfig {
         return new Queue(queueMap.get("search"));
     }
     @Bean
-    public Queue mqServer_usersQueue() {
-        return new Queue(queueMap.get("users"));
+    public Queue mqServer_userQueue() {
+        return new Queue(queueMap.get("user"));
     }
     @Bean
     public Queue mqServer_viewsQueue() {
@@ -78,14 +78,14 @@ public class RabbitMQConfig {
         return BindingBuilder
                 .bind(mqServer_testAppQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("testapp"));
+                .with(routingKeyMap.get("test"));
     }
     @Bean
-    public Binding postsBinding(){
+    public Binding postBinding(){
         return BindingBuilder
-                .bind(mqServer_postsQueue())
+                .bind(mqServer_postQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("posts"));
+                .with(routingKeyMap.get("post"));
     }
     @Bean
     public Binding newsfeedBinding(){
@@ -102,11 +102,11 @@ public class RabbitMQConfig {
                 .with(routingKeyMap.get("search"));
     }
     @Bean
-    public Binding usersBinding(){
+    public Binding userBinding(){
         return BindingBuilder
-                .bind(mqServer_usersQueue())
+                .bind(mqServer_userQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("users"));
+                .with(routingKeyMap.get("user"));
     }
     @Bean
     public Binding viewsBinding(){

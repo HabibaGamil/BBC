@@ -22,7 +22,7 @@ public class GatewayServerApplication {
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p
-                        .path("/bbc/testapp/**")
+                        .path("/bbc/test/**")
                         .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
                                 .addResponseHeader("X-Response-Time",new Date().toString()))
                         .uri("lb://mqserver"))
