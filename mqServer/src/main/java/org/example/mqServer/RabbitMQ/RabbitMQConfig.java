@@ -50,6 +50,11 @@ public class RabbitMQConfig {
         return new Queue(queueMap.get("search"));
     }
     @Bean
+    public Queue mqServer_zipkinQueue(){
+        return new Queue(queueMap.get("zipkin"));
+    }
+
+    @Bean
     public Queue mqServer_usersQueue() {
         return new Queue(queueMap.get("users"));
     }
@@ -102,11 +107,18 @@ public class RabbitMQConfig {
                 .with(routingKeyMap.get("search"));
     }
     @Bean
-    public Binding usersBinding(){
+    public Binding userBinding(){
         return BindingBuilder
                 .bind(mqServer_usersQueue())
                 .to(exchange())
                 .with(routingKeyMap.get("users"));
+    }
+    @Bean
+    public Binding zipkinBinding(){
+        return BindingBuilder
+                .bind(mqServer_zipkinQueue())
+                .to(exchange())
+                .with(routingKeyMap.get("zipkin"));
     }
     @Bean
     public Binding viewsBinding(){
