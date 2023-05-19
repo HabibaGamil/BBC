@@ -48,8 +48,8 @@ public class RabbitMQConfig {
         return new FanoutExchange(exchangeMap.get("search"));
     }
     @Bean
-    public FanoutExchange user_fanout() {
-        return new FanoutExchange(exchangeMap.get("user"));
+    public FanoutExchange users_fanout() {
+        return new FanoutExchange(exchangeMap.get("users"));
     }
     @Bean
     public FanoutExchange views_fanout() {
