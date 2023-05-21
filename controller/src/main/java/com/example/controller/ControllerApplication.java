@@ -1,14 +1,13 @@
-package com.example.BBC;
+package com.example.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BbcApplication {
+public class ControllerApplication {
 
 	public static void main(String[] args) {
-
-		SpringApplication.run(BbcApplication.class, args);
+		SpringApplication.run(ControllerApplication.class, args);
 	}
 
 }
