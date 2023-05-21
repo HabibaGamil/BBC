@@ -51,7 +51,7 @@ public class RabbitMQConfig {
     }
     @Bean
     public Queue mqServer_usersQueue() {
-        return new Queue(queueMap.get("users"));
+        return new Queue(queueMap.get("user"));
     }
     @Bean
     public Queue mqServer_viewsQueue() {
