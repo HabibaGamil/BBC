@@ -50,8 +50,8 @@ public class RabbitMQConfig {
         return new Queue(queueMap.get("search"));
     }
     @Bean
-    public Queue mqServer_usersQueue() {
-        return new Queue(queueMap.get("users"));
+    public Queue mqServer_userQueue() {
+        return new Queue(queueMap.get("user"));
     }
     @Bean
     public Queue mqServer_viewsQueue() {
@@ -102,11 +102,11 @@ public class RabbitMQConfig {
                 .with(routingKeyMap.get("search"));
     }
     @Bean
-    public Binding usersBinding(){
+    public Binding userBinding(){
         return BindingBuilder
-                .bind(mqServer_usersQueue())
+                .bind(mqServer_userQueue())
                 .to(exchange())
-                .with(routingKeyMap.get("users"));
+                .with(routingKeyMap.get("user"));
     }
     @Bean
     public Binding viewsBinding(){
