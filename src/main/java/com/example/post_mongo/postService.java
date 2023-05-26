@@ -3,10 +3,9 @@ package com.example.post_mongo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -18,6 +17,10 @@ public class postService {
 
     public List<Article> getAllArticles(){
         return postRepository.findAll();
+    }
+
+    public Optional<Article> getArticle(String id){
+        return postRepository.findById(id);
     }
 
     public List<MediaServer> getAllMedia(){
