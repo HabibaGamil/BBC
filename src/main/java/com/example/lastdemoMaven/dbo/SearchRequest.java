@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -13,7 +15,8 @@ import lombok.Setter;
 public class SearchRequest{
     private boolean most_viewed;
     private int type;
-    private String [] ids;
+    private List<String> ids;
     private int number_of_posts;
-
 }
+
+
