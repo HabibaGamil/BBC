@@ -14,15 +14,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
+		<module>views</module>
 		<module>test_app</module>
 		<module>configServer</module>
 		<module>eurekaserver</module>
 		<module>apiGatewayServer</module>
 		<module>controller</module>
 		<module>mqServer</module>
-	</modules>
-	<modules>
-		<module>views</module>
 	</modules>
 	<name>BBC</name>
 	<description>Scalable Project</description>
