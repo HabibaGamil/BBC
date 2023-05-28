@@ -28,7 +28,7 @@ public class MQServerController {
     @Autowired
     Environment environment;
 
-    @RequestMapping({"{app}/{requestParams}"})
+    @GetMapping({"{app}/{requestParams}"})
 
     public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse) {
 
