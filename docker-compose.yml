@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+
+  configServer:
+    image: bbc1/configserver:latest
+    mem_limit: 700m
+    ports:
+      - "8888:8888"
+    networks:
+      - bbc-network
+
+  eurekaServer:
+    image: bbc1/eurekaserver:latest
+    mem_limit: 700m
+    ports:
+      - "8070:8070"
+    networks:
+      - bbc-network
+
+  apiGatewayServer:
+    image: bbc1/apigatewayserver:latest
+    mem_limit: 700m
+    ports:
+      - "8072:8072"
+    networks:
+      - bbc-network
+
+  controller:
+    image: bbc1/controller:latest
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      - bbc-network
+      -
+  test_app:
+    image: bbc1/testapp:latest
+    mem_limit: 700m
+    ports:
+      - "8091:8091"
+    networks:
+      - bbc-network
+networks:
+  bbc-network:

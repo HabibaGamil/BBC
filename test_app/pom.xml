@@ -96,7 +96,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>test_app</name>
+						<name>bbc/testapp</name>
 					</image>
 				</configuration>
 			</plugin>
