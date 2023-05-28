@@ -29,10 +29,9 @@ public class MQServerController {
     Environment environment;
 
     @RequestMapping({"{app}/{requestParams}"})
+    public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse, @RequestBody String body) {
 
-    public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse) {
-
-        Request request = new Request(requestParams,headers);
+        Request request = new Request(requestParams,headers, body);
         Response response = null;
         try
         {

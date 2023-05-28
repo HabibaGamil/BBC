@@ -13,44 +13,49 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 public final class SearchUtil {
-    private SearchUtil(){}
+    private SearchUtil() {
+    }
 
 
-    public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDTO dto){
-        try{
+    public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDTO dto) {
+        try {
             final int page = dto.getPage();
             final int size = dto.getSize();
-            final int from = page <=0? 0: page*size;
+            final int from = page <= 0 ? 0 : page * size;
 
             SearchSourceBuilder builder = new SearchSourceBuilder()
                     .from(from)
-                    .size(size)
-                    .postFilter(getQueryBuilder(dto));
+                    .size(size);
 
-            if(dto.getSortBy() != null){
-                 builder = builder.sort(
-                         dto.getSortBy(),
-                         dto.getOrder() != null? dto.getOrder() : SortOrder.ASC
-                 );
+            if (!dto.getSearchTerm().equals("")) {
+                builder.postFilter(getQueryBuilder(dto));
             }
 
-            SearchRequest request= new SearchRequest(indexName);
-            request.source(builder);
-            return  request;
+            if (dto.getSortBy() != null) {
+                builder = builder.sort(
+                        dto.getSortBy(),
+                        dto.getOrder() != null ? dto.getOrder() : SortOrder.DESC
+                );
+            }
 
-        } catch (final Exception e){
+            SearchRequest request = new SearchRequest(indexName);
+            request.source(builder);
+            return request;
+
+        } catch (final Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    public static QueryBuilder getQueryBuilder(final SearchRequestDTO dto){
-        if(dto==null) return null;
+
+    public static QueryBuilder getQueryBuilder(final SearchRequestDTO dto) {
+        if (dto == null) return null;
 
 
         final List<String> fields = dto.getFields();
-        if(CollectionUtils.isEmpty(fields)) return null;
+        if (CollectionUtils.isEmpty(fields)) return null;
 
-        if(fields.size()>1){
+        if (fields.size() > 1) {
             MultiMatchQueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(dto.getSearchTerm())
                     .operator(Operator.OR);
 
@@ -63,7 +68,7 @@ public final class SearchUtil {
                 .map(field ->
                         QueryBuilders.matchQuery(field, dto.getSearchTerm())
                                 .operator(Operator.OR)
-                               )
+                )
                 .orElse(null);
     }
 }

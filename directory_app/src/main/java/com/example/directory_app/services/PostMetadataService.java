@@ -15,6 +15,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.xcontent.XContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +71,7 @@ public class PostMetadataService {
 //    + include pagination( restrict number of posts retrieved + should be sorted)
     public List<PostMetadataEntity> search(final SearchRequestDTO dto) throws IOException {
         final SearchRequest request = SearchUtil.buildSearchRequest(POSTS_METADATA_INDEX, dto);
+
 
         if(request == null){
             LOG.error("Failed to build search request");
