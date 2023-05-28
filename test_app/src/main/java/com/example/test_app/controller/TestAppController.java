@@ -1,5 +1,8 @@
 package com.example.test_app.controller;
 
+import com.example.test_app.DataClasses.Request;
+import com.example.test_app.DataClasses.Response;
+import com.example.test_app.RabbitMQ.Producer;
 import com.example.test_app.config.Config;
 import com.example.test_app.config.CustomClassLoader;
 import com.example.test_app.config.Properties;
@@ -19,12 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 @RestController
 @EnableAutoConfiguration
 @RefreshScope // important
 public class TestAppController {
-     @Autowired
+    private Producer producer;
+    @Autowired
      Config config;
      Properties properties ;
      RabbitTemplate rabbitTemplate;
@@ -45,7 +50,15 @@ public class TestAppController {
         return "Hello from instance running on port " + port;
     }
 
+    @GetMapping("/test")
+    public String  test() {
+        HashMap<String,Object> testMapheaders = new HashMap<>();
+        HashMap<String,String> testMapBody = new HashMap<>();
 
+        Request r = new Request("test",testMapheaders,testMapBody);
+        Response res = producer.sendMessage(r);
+        return  res.getResponse();
+    }
 
 
 }
