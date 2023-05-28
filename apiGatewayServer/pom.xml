@@ -69,7 +69,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>bbc/${project.artifactId}</name>
+                        <name>bbc/apigatewayserver</name>
                     </image>
                 </configuration>
             </plugin>
