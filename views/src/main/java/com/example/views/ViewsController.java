@@ -14,6 +14,7 @@ public class ViewsController {
     @GetMapping
     public List<Views> fetchAllViews(){
         return viewService.getAllViews();
+
     }
 
     record NewRequest(String postID){}

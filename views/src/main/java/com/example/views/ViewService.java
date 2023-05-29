@@ -49,5 +49,8 @@ public class ViewService {
 
         return newViews.get();
     }
+    public void deleteAllViews(){
+        viewsRepository.deleteAll();
+    }
 
 }
