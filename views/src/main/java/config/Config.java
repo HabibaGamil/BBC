@@ -13,7 +13,7 @@ import java.util.Map;
 @RefreshScope // important
 @Configuration
 @Component
-@ConfigurationProperties(prefix = "testapp")
+@ConfigurationProperties(prefix = "views")
 @Getter @Setter @ToString
 public class Config {
     private String msg;
