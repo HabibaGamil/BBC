@@ -27,11 +27,11 @@ private Producer producer;
         viewService.createOrEditViews(request.postID);
 
     }
-    @GetMapping("{postID}")
-    public Views getAViews(@PathVariable("postID") String postId ){
-        return viewService.getAViews(postId);
-
-    }
+//    @GetMapping("{postID}")
+//    public Views getAViews(@PathVariable("postID") String postId ){
+//        return viewService.getAViews(postId);
+//
+//    }
     @DeleteMapping("{postID}")
     public void deleteAViews(@PathVariable("postID") String postId ){
         viewService.deleteAViews(postId);

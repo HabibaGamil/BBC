@@ -53,5 +53,5 @@ public class Producer {
 
 //        viewService.deleteAllViews();
 
-    }
+        System.out.println("lolololollolololololoy"); }
 }
