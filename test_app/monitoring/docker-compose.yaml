@@ -1,0 +1,126 @@
+version: "3.8"
+
+services:
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - bbc
+
+  grafana:
+    image: "grafana/grafana:latest"
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=password
+    networks:
+      - bbc
+    depends_on:
+      - prometheus
+
+  zipkin:
+    image: openzipkin/zipkin
+    mem_limit: 700m
+    ports:
+      - "9411:9411"
+    networks:
+      - bbc
+
+  configServer:
+    image: bbc1/configserver:latest
+    mem_limit: 700m
+    ports:
+      - "8888:8888"
+    networks:
+      - bbc
+
+  eurekaServer:
+    image: bbc1/eurekaserver:latest
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - bbc
+    depends_on:
+      - configServer
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 15s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+
+#  apiGatewayServer:
+#    image: bbc1/apigatewayserver:latest
+#    mem_limit: 700m
+#    ports:
+#      - "8072:8072"
+#    networks:
+#      - bbc
+#    depends_on:
+#      - configServer
+#      - eurekaServer
+#      - test_app
+#      - controller
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        delay: 45s
+#        max_attempts: 3
+#        window: 180s
+#    environment:
+#      SPRING_PROFILES_ACTIVE: default
+#      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+#  controller:
+#    image: bbc1/controller:latest
+#    mem_limit: 700m
+#    ports:
+#      - "8000:8000"
+#    networks:
+#      - bbc
+#    depends_on:
+#      - configServer
+#      - eurekaServer
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        delay: 45s
+#        max_attempts: 3
+#        window: 180s
+#    environment:
+#      SPRING_PROFILES_ACTIVE: default
+#      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+  test_app:
+    image: bbc1/testapp:latest
+    mem_limit: 700m
+    ports:
+      - "8091:8091"
+    networks:
+      - bbc
+    depends_on:
+      - configServer
+      - eurekaServer
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 45s
+        max_attempts: 3
+        window: 180s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+networks:
+  bbc:
