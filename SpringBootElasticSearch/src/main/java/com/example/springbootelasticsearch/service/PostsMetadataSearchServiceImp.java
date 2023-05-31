@@ -73,7 +73,12 @@ public class PostsMetadataSearchServiceImp implements PostsMetadataSearchService
 
     // findById and getPostMetadataById are the same but implemented differently
 
-    public PostMetadataEntity findById(final long id) {
+//    public PostMetadataEntity findById(final long id) {
+//        return postMetadataRepository.findById(id).orElse(null);
+//    }
+
+
+    public PostMetadataEntity findById(final String id) {
         return postMetadataRepository.findById(id).orElse(null);
     }
 

@@ -93,7 +93,7 @@ public class Consumer {
         return searchResponse;
     }
 
-    @RabbitListener(queues = "view_count_queue")
+    @RabbitListener(queues = "view_count_dir_queue")
     public void consumeMQServerMessageToUpdatePostViewCount(ViewsBroadcastRequest request) {
         // loop over view list
         // get the post metadata id
@@ -104,13 +104,14 @@ public class Consumer {
 
             PostMetadataEntity postMetadataEntity = postsMetadataService.findById(view.getPostID());
 
-            long postCurrentViewCount = postMetadataEntity.getViewCount();
-            postMetadataEntity.setViewCount( postCurrentViewCount + view.getView_count());
+            if(postMetadataEntity != null) {
+                long postCurrentViewCount = postMetadataEntity.getViewCount();
+                postMetadataEntity.setViewCount(postCurrentViewCount + view.getView_count());
 
-            postsMetadataService.index(postMetadataEntity);
-
+                postsMetadataService.index(postMetadataEntity);
+            }
         }
 
-        LOGGER.info("post metadatas' view count is updated!");
+        LOGGER.info("post metadatas' view count in DIRECTORY is updated!");
     }
 }

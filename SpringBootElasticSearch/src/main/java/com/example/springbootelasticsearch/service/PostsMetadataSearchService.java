@@ -11,7 +11,7 @@ public interface PostsMetadataSearchService {
     public Boolean index(final PostMetadataEntity postsMetadataEntity);
     public PostMetadataEntity getPostMetadataById(String id) throws IOException, IOException;
     public void save(final PostMetadataEntity postsMetadataEntity);
-    public PostMetadataEntity findById(final long id);
+    public PostMetadataEntity findById(final String id);
     public Iterable<PostMetadataEntity> findAll();
 
 

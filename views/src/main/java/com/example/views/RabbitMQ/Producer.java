@@ -45,11 +45,8 @@ public class Producer {
         LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", viewsBroadcastRequest.toString()));
         LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", rabbitMQConfig.getRoutingKeyMap()));
 
-        String routingKey = "view_count_routing_key";
 
-        LOGGER.info(String.format("Routing key=> %s", routingKey));
-
-        rabbitTemplate.convertAndSend(broadcast_views_exchange, routingKey, viewsBroadcastRequest);
+        rabbitTemplate.convertAndSend(broadcast_views_exchange, "",  viewsBroadcastRequest);
 
         viewService.deleteAllViews();
 

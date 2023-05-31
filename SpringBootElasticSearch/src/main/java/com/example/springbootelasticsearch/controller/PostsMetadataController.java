@@ -28,7 +28,7 @@ public class PostsMetadataController {
     }
 
     @GetMapping("/{id}")
-    public PostMetadataEntity findById(@PathVariable  final long id){
+    public PostMetadataEntity findById(@PathVariable  final String id){
         return postsMetadataSearchService.findById(id);
     }
 
@@ -37,6 +37,7 @@ public class PostsMetadataController {
         postsMetadataSearchService.index(postsMetadataEntity);
 //        postsMetadataSearchService.save(postsMetadataEntity);
     }
+
     @PostMapping("/search")
     @CachePut(value = "searchTerms", key = "#dto.searchTerm + ' ' + #dto.fields", condition = "#result != null && !#result.isEmpty()")
     public List<PostMetadataEntity> search(@RequestBody final SearchRequestDTO dto) throws IOException {

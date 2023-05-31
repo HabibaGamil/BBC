@@ -96,9 +96,9 @@ public class PostMetadataService {
     public Iterable<PostMetadataEntity> findAll() {
         return postMetadataRepository.findAll();
     }
+
+
     public PostMetadataEntity findById(final String id) {
         return postMetadataRepository.findById(id).orElse(null);
     }
-
-
 }
