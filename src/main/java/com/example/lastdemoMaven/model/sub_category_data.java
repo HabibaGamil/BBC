@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -19,19 +20,16 @@ public class sub_category_data implements Serializable {
     @Id
     private String sub_category_id;
 
-    private String sub_category_name;
+    private List<PostMetadataEntity> most_viewed;
 
-    private meta_data [] most_viewed;
-
-    private meta_data [] most_recent;
+    private List<PostMetadataEntity> most_recent;
 
     @Override
     public String toString() {
         return "sub_category_data{" +
                 "sub_category_id='" + sub_category_id + '\'' +
-                ", sub_category_name='" + sub_category_name + '\'' +
-                ", most_viewed=" + Arrays.toString(most_viewed) +
-                ", most_recent=" + Arrays.toString(most_recent) +
+                ", most_viewed=" + most_viewed +
+                ", most_recent=" + most_recent +
                 '}';
     }
 }

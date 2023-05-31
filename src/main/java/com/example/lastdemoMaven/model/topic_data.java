@@ -8,6 +8,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 
 @Getter
@@ -20,19 +21,16 @@ public class topic_data implements Serializable {
     @Id
     private String topic_id;
 
-    private String topic_name;
+    private List<PostMetadataEntity> most_viewed;
 
-    private meta_data [] most_viewed;
-
-    private meta_data [] most_recent;
+    private List<PostMetadataEntity> most_recent;
 
     @Override
     public String toString() {
         return "topic_data{" +
                 "topic_id='" + topic_id + '\'' +
-                ", topic_name='" + topic_name + '\'' +
-                ", most_viewed=" + Arrays.toString(most_viewed) +
-                ", most_recent=" + Arrays.toString(most_recent) +
+                ", most_viewed=" + most_viewed +
+                ", most_recent=" + most_recent +
                 '}';
     }
 }

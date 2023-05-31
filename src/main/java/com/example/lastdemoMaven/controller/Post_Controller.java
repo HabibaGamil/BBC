@@ -16,21 +16,21 @@ public class Post_Controller {
     public Post_Controller() {
         RedisConfig rc = new RedisConfig();
         RedisTemplate<String, Object> rt =  rc.template();
-        postService = new post_service(rt);
+        postService = new post_service();
         pr = new posts_repository(rt);
     }
 
-
-    public void addPostToTheHash(Object meta_data){
-        postService.addToHashPosts(key,meta_data);
-    }
-    public Map<String,Object> getPostHash(){
-        return postService.getHash(key);
-    }
-
-    public void deleteTheHash(){
-        postService.deleteHash(key);
-    }
+//
+//    public void addPostToTheHash(Object meta_data){
+//        postService.addToHashPosts(key,meta_data);
+//    }
+//    public Map<String,Object> getPostHash(){
+//        return postService.getHash(key);
+//    }
+//
+//    public void deleteTheHash(){
+//        postService.deleteHash(key);
+//    }
 
 
 }

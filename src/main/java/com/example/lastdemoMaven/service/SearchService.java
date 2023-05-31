@@ -1,10 +1,7 @@
 package com.example.lastdemoMaven.service;
 
 import com.example.lastdemoMaven.dbo.SearchResponse;
-import com.example.lastdemoMaven.model.category_data;
-import com.example.lastdemoMaven.model.meta_data;
-import com.example.lastdemoMaven.model.sub_category_data;
-import com.example.lastdemoMaven.model.topic_data;
+import com.example.lastdemoMaven.model.*;
 import com.example.lastdemoMaven.repository.categories_repository;
 import com.example.lastdemoMaven.repository.sub_categories_repository;
 import com.example.lastdemoMaven.repository.topics_repository;
@@ -23,18 +20,18 @@ public class SearchService {
     private final topics_repository TD;
 
 
-    public void insertDataToCategoryCache(String category_name, String category_id, meta_data [] most_viewed, meta_data [] most_recent) {
-        category_data newData = new category_data(category_id,category_name,most_viewed,most_recent);
+    public void insertDataToCategoryCache(String category_id, List<PostMetadataEntity> most_viewed, List<PostMetadataEntity> most_recent) {
+        category_data newData = new category_data(category_id,most_viewed,most_recent);
         CR.save(newData);
     }
 
-    public void insertDataToSubCategoryCache(String sub_category_name, String sub_category_id, meta_data [] most_viewed,meta_data [] most_recent) {
-        sub_category_data newData = new sub_category_data(sub_category_id,sub_category_name,most_viewed,most_recent);
+    public void insertDataToSubCategoryCache(String sub_category_id, List<PostMetadataEntity> most_viewed, List<PostMetadataEntity> most_recent) {
+        sub_category_data newData = new sub_category_data(sub_category_id,most_viewed,most_recent);
         SCR.save(newData);
     }
 
-    public void insertDataToTopicCache(String topic_name, String topic_id, meta_data [] most_viewed,meta_data [] most_recent) {
-        topic_data newData = new topic_data(topic_id,topic_name,most_viewed,most_recent);
+    public void insertDataToTopicCache(String topic_id, List<PostMetadataEntity> most_viewed, List<PostMetadataEntity> most_recent) {
+        topic_data newData = new topic_data(topic_id,most_viewed,most_recent);
         TD.save(newData);
     }
 
@@ -51,21 +48,19 @@ public class SearchService {
     }
 
     public void update_cache(SearchResponse response){
-       List<meta_data[]> meta_data= response.getMetadata();
-       String [] ids = response.getIds();
+       List<List<PostMetadataEntity>> meta_data= response.getMetadata();
+       meta_data = validating_number_of_posts(meta_data,response.getNumber_of_posts());
+        List<String>ids = response.getIds();
         switch (response.getType()) {
             case 0 -> {
                 for (int i = 0; i < meta_data.size(); i++) {
-                    meta_data[] meta_data_per_category = meta_data.get(i);
-                    meta_data metaData = meta_data_per_category[0];
-                    String category_name = metaData.getName();
-                    //String[] category_ids = metaData.getIds();
-                    String category_id = ids[i];
-                    //category_data specificRow = getByIdFromCategoryCache(category_name);
+                    List<PostMetadataEntity> meta_data_per_category = meta_data.get(i);
+                    //PostMetadataEntity metaData = meta_data_per_category.get(0);
+                    //String category_name = metaData.getName();
+                    String category_id = ids.get(i);
                     category_data specificRow = getByIdFromCategoryCache(category_id);
                     if (specificRow == null) {
-                        addNewRow(response.isMost_viewed(), 0, category_name, category_id, meta_data_per_category);
-
+                        addNewRow(response.isMost_viewed(), 0, category_id, meta_data_per_category);
                     }
                     else {
                         updateExistedRow(specificRow, response.isMost_viewed(), meta_data_per_category, 0);
@@ -74,15 +69,13 @@ public class SearchService {
             }
             case 1 -> {
                 for (int i = 0; i < meta_data.size(); i++) {
-                    meta_data[] meta_data_per_sub_category = meta_data.get(i);
-                    meta_data metaData = meta_data_per_sub_category[0];
-                    String sub_category_name =  metaData.getName();
-                    //String[] sub_category_ids = metaData.getIds();
-                    String sub_category_id = ids[i];
-                    //category_data specificRow = getByIdFromCategoryCache(sub_category_name);
-                    category_data specificRow = getByIdFromCategoryCache(sub_category_id);
+                    List<PostMetadataEntity> meta_data_per_sub_category = meta_data.get(i);
+                    //PostMetadataEntity metaData = meta_data_per_sub_category.get(0);
+                    //String sub_category_name =  metaData.getName();
+                    String sub_category_id = ids.get(i);
+                    sub_category_data specificRow = getByIdFromSubCategoryCache(sub_category_id);
                     if (specificRow == null)
-                        addNewRow(response.isMost_viewed(), 1, sub_category_name, sub_category_id, meta_data_per_sub_category);
+                        addNewRow(response.isMost_viewed(), 1, sub_category_id, meta_data_per_sub_category);
                     else {
                         updateExistedRow(specificRow, response.isMost_viewed(),  meta_data_per_sub_category, 1);
                     }
@@ -90,15 +83,13 @@ public class SearchService {
             }
             case 2 ->{
                 for (int i = 0; i < meta_data.size(); i++) {
-                    meta_data[] meta_data_per_topic = meta_data.get(i);
-                    meta_data metaData = meta_data_per_topic[0];
-                    String topic_name =  metaData.getName();
-                    //String[] topic_ids =  metaData.getIds();
-                    String topic_id =  ids[i];
-                    //category_data specificRow = getByIdFromCategoryCache(topic_name);
-                    category_data specificRow = getByIdFromCategoryCache(topic_id);
+                    List<PostMetadataEntity> meta_data_per_topic = meta_data.get(i);
+                    // PostMetadataEntity metaData = meta_data_per_topic.get(0);
+                    //String topic_name =  metaData.getName();
+                    String topic_id =  ids.get(i);
+                    topic_data specificRow = getByIdFromTopicsCache(topic_id);
                     if (specificRow == null)
-                        addNewRow(response.isMost_viewed(), 2, topic_name, topic_id, meta_data_per_topic);
+                        addNewRow(response.isMost_viewed(), 2, topic_id, meta_data_per_topic);
                     else {
                         updateExistedRow(specificRow, response.isMost_viewed(), meta_data_per_topic, 2);
                     }
@@ -107,24 +98,24 @@ public class SearchService {
         }
     }
 
-    private void addNewRow(boolean most_view_Or_recent, int type,String name,String id,meta_data [] meta_data_per_category){
+    private void addNewRow(boolean most_view_Or_recent, int type, String id, List<PostMetadataEntity> meta_data_per_category){
         if(most_view_Or_recent){
             switch (type) {
-                case 0 -> insertDataToCategoryCache(name, id, meta_data_per_category, null);
-                case 1 -> insertDataToSubCategoryCache(name, id, meta_data_per_category, null);
-                case 2 -> insertDataToTopicCache(name, id, meta_data_per_category, null);
+                case 0 -> insertDataToCategoryCache(id, meta_data_per_category, null);
+                case 1 -> insertDataToSubCategoryCache(id, meta_data_per_category, null);
+                case 2 -> insertDataToTopicCache(id, meta_data_per_category, null);
             }
         }
         else{
             switch (type) {
-                case 0 -> insertDataToCategoryCache(name, id, null, meta_data_per_category);
-                case 1 -> insertDataToSubCategoryCache(name, id, null, meta_data_per_category);
-                case 2 -> insertDataToTopicCache(name, id, null, meta_data_per_category);
+                case 0 -> insertDataToCategoryCache(id, null, meta_data_per_category);
+                case 1 -> insertDataToSubCategoryCache(id, null, meta_data_per_category);
+                case 2 -> insertDataToTopicCache(id, null, meta_data_per_category);
             }
         }
     }
 
-    private void updateExistedRow(Object rowToBeUpdated, boolean whichField, meta_data [] updatedValue, int type){
+    private void updateExistedRow(Object rowToBeUpdated, boolean whichField, List<PostMetadataEntity> updatedValue, int type){
         switch (type) {
             case 0 -> {
                 assert rowToBeUpdated instanceof category_data;
@@ -156,6 +147,21 @@ public class SearchService {
         }
     }
 
+    public List<List<PostMetadataEntity>> validating_number_of_posts(List<List<PostMetadataEntity>> meta_data, int number_of_posts){
+        for (int i =0; i<meta_data.size();i++) {
+            List<PostMetadataEntity> eachMetaData = meta_data.get(i);
+            if (eachMetaData.size() <= number_of_posts)
+                return meta_data;
+            else {
+                for (int j = number_of_posts; j < eachMetaData.size(); j++) {
+                    eachMetaData.remove(j);
+                    j--;
+                }
+                meta_data.set(i,eachMetaData);
+            }
+        }
+        return meta_data;
+    }
 }
 
 

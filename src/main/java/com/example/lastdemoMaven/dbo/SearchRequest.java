@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -12,10 +13,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchRequest{
+public class SearchRequest implements Serializable {
     private boolean most_viewed;
     private int type;
-    private List<String> ids;
     private int number_of_posts;
 }
 
