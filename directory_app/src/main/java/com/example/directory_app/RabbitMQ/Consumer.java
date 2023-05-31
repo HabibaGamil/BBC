@@ -52,7 +52,7 @@ public class Consumer {
     }};
 
 
-    @RabbitListener(queues = "newsfeed_dir")
+    @RabbitListener(queues = "newsfeed_dir_queue")
     public  SearchResponse consumeMQServerMessage(SearchRequest request){
         List<PostMetadataEntity> postMetadataEntities = new ArrayList<>();
 
@@ -91,4 +91,5 @@ public class Consumer {
     }
 
 
-}
+
+    }

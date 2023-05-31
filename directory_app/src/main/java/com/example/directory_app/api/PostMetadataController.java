@@ -63,7 +63,14 @@ public class PostMetadataController {
 
     @PostMapping("/search/queue")
 //    @CachePut(value = "searchTerms", key = "#dto.searchTerm + ' ' + #dto.fields")
-    public SearchResponse search_queue(@RequestBody final SearchRequest req) throws IOException {
-        return producer.sendMessage(req);
+    public SearchResponse search_newsfeed_queue(@RequestBody final SearchRequest req) throws IOException {
+        return producer.sendMessageToSendPostsToNewsfeed(req);
     }
+//
+//    @PostMapping("/search/queue")
+////    @CachePut(value = "searchTerms", key = "#dto.searchTerm + ' ' + #dto.fields")
+//    public void directory_viewCount_queue(@RequestBody final SearchRequest req) throws IOException {
+//        return producer.sendMessageToSendPostsToNewsfeed(req);
+//    }
+
 }
