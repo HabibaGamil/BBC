@@ -10,7 +10,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ControllerProducer {
+public class  ControllerProducer {
     private Logger LOGGER = LoggerFactory.getLogger(ControllerProducer.class);
     @Autowired
     RabbitMQConfig rabbitMQConfig;

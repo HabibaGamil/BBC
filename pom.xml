@@ -15,6 +15,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>directory_app</module>
+		<module>views</module>
 		<module>test_app</module>
 		<module>configServer</module>
 		<module>eurekaserver</module>

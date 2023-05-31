@@ -1,4 +1,4 @@
-package com.example.controller.RabbitMQ;
+package RabbitMQ;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,51 +17,57 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+
 @RefreshScope // important
 @Configuration
 @Component
-@ConfigurationProperties(prefix = "controller")
-@Getter
-@Setter
-@ToString
+@ConfigurationProperties(prefix = "views")
+@Getter @Setter @ToString
 public class RabbitMQConfig {
 
-    private Map<String, String> exchangeMap;
+    private Map<String, String> routingKeyMap;
+    private Map<String, String> queueMap;
 
 
-    // fanout exchange beans
+    @Value("${view_count_exchange}")
+    private String exchange;
+    @Value("${post_views_exchange}")
+    private String exchangeforPost;
+
+    ///////////////////////// Queues Beans /////////////////
     @Bean
-    public FanoutExchange test_fanout() {
-        return new FanoutExchange(exchangeMap.get("test"));
+    public Queue views_directoryandsearch(){
+        return new Queue("view_count_queue");
     }
     @Bean
-    public FanoutExchange post_fanout() {
-        return new FanoutExchange(exchangeMap.get("post"));
+    public Queue posts_views(){
+        return new Queue("post_views_queue");
     }
 
+
+    // spring bean for exchange
     @Bean
-    public FanoutExchange newsfeed_fanout() {
-        return new FanoutExchange(exchangeMap.get("newsfeed"));
+    public TopicExchange exchange(){
+        return new TopicExchange(exchange);
     }
     @Bean
-    public FanoutExchange search_fanout() {
-        return new FanoutExchange(exchangeMap.get("search"));
+    public TopicExchange exchangeforpost(){
+        return new TopicExchange(exchangeforPost);
+    }
+    // spring bean for binding between exchange and queue using routing key //
+    @Bean
+    public Binding viewAppBinding(){
+        return BindingBuilder
+                .bind(views_directoryandsearch())
+                .to(exchange())
+                .with("view_count_routing_key");
     }
     @Bean
-    public FanoutExchange user_fanout() {
-        return new FanoutExchange(exchangeMap.get("user"));
-    }
-    @Bean
-    public FanoutExchange views_fanout() {
-        return new FanoutExchange(exchangeMap.get("views"));
-    }
-    @Bean
-    public FanoutExchange directory_fanout() {
-        return new FanoutExchange(exchangeMap.get("directory"));
-    }
-    @Bean
-    public FanoutExchange media_fanout() {
-        return new FanoutExchange(exchangeMap.get("media"));
+    public Binding viewAppPostBinding(){
+        return BindingBuilder
+                .bind(posts_views())
+                .to(exchangeforpost())
+                .with("post_views_routing_key");
     }
     // message converter
     @Bean
