@@ -53,41 +53,10 @@ public class Producer {
         SearchResponse response = rabbitTemplate
                 .convertSendAndReceiveAsType(newsfeedExchange, routingKey, req, new ParameterizedTypeReference<>() {});
 
-//        rabbitTemplate.converands
         LOGGER.info(String.format("Response", response));
 
         return response;
 
     }
 
-    public void sendMessageToUpdateViewCount(UpdateViewCountEvent req){
-
-        LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", req.toString()));
-        LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", rabbitMQConfig.getRoutingKeyMap()));
-
-        String routingKey = "view_count_routing_key";
-
-        LOGGER.info(String.format("Routing key=> %s", routingKey));
-
-        ViewsResponse response = rabbitTemplate
-                .convertSendAndReceiveAsType(viewCountExchange, routingKey, req, new ParameterizedTypeReference<>() {});
-
-
-        List<Views> views_records = response.getViews();
-        for(Views view: views_records){
-
-            PostMetadataEntity postMetadataEntity = postsMetadataService.findById(view.getPostID());
-
-            long postCurrentViewCount = postMetadataEntity.getViewCount();
-            postMetadataEntity.setViewCount( postCurrentViewCount + view.getView_count());
-
-            postsMetadataService.save(postMetadataEntity);
-
-        }
-
-
-
-        LOGGER.info(String.format("Response", response));
-
-    }
 }

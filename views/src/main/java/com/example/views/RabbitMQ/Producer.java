@@ -32,15 +32,16 @@ public class Producer {
     @Autowired
     private ViewService viewService;
 
-    public void broadcastCurrentViewsCount(){
+    public void broadcastCurrentViewsCount() {
 
         List<Views> viewsList = viewService.getAllViews();
 
         ViewsBroadcastRequest viewsBroadcastRequest =
                 ViewsBroadcastRequest.builder()
-                .views(viewsList)
-                .build();
+                        .views(viewsList)
+                        .build();
 
+        //TODO: change log messages
         LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", viewsBroadcastRequest.toString()));
         LOGGER.info(String.format("api gateway request sent to RabbitMQ => %s", rabbitMQConfig.getRoutingKeyMap()));
 
@@ -48,10 +49,10 @@ public class Producer {
 
         LOGGER.info(String.format("Routing key=> %s", routingKey));
 
-//        rabbitTemplate.con
         rabbitTemplate.convertAndSend(broadcast_views_exchange, routingKey, viewsBroadcastRequest);
 
-//        viewService.deleteAllViews();
+        viewService.deleteAllViews();
 
-        System.out.println("lolololollolololololoy"); }
+        LOGGER.info("views records successfully sent to queue");
+    }
 }

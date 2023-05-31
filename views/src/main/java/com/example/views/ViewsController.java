@@ -3,6 +3,7 @@ package com.example.views;
 import com.example.views.RabbitMQ.Producer;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,22 +28,22 @@ private Producer producer;
         viewService.createOrEditViews(request.postID);
 
     }
-//    @GetMapping("{postID}")
-//    public Views getAViews(@PathVariable("postID") String postId ){
-//        return viewService.getAViews(postId);
-//
-//    }
-    @DeleteMapping("{postID}")
+    @GetMapping("/{postID}")
+    public Views getAViews(@PathVariable("postID") String postId ){
+        return viewService.getAViews(postId);
+
+    }
+
+    @DeleteMapping("/{postID}")
     public void deleteAViews(@PathVariable("postID") String postId ){
         viewService.deleteAViews(postId);
 
     }
 
-
+    @Scheduled(fixedRate=600000)
     @PostMapping("/publish_views")
     public void publishViews(){
         producer.broadcastCurrentViewsCount();
-//        viewService.publishViews();
     }
 
 }

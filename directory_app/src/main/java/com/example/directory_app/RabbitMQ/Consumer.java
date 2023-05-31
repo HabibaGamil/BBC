@@ -2,9 +2,12 @@ package com.example.directory_app.RabbitMQ;
 
 import com.example.directory_app.DataClasses.SearchRequest;
 import com.example.directory_app.DataClasses.SearchResponse;
+import com.example.directory_app.DataClasses.ViewsBroadcastRequest;
+import com.example.directory_app.DataClasses.ViewsResponse;
 import com.example.directory_app.config.Config;
 import com.example.directory_app.config.Properties;
 import com.example.directory_app.entities.PostMetadataEntity;
+import com.example.directory_app.entities.Views;
 import com.example.directory_app.search.PageRequestDTO;
 import com.example.directory_app.search.SearchRequestDTO;
 import com.example.directory_app.services.PostMetadataService;
@@ -90,6 +93,24 @@ public class Consumer {
         return searchResponse;
     }
 
+    @RabbitListener(queues = "view_count_queue")
+    public void consumeMQServerMessageToUpdatePostViewCount(ViewsBroadcastRequest request) {
+        // loop over view list
+        // get the post metadata id
+        // update the view count of the post metadata
 
+        List<Views> views_records = request.getViews();
+        for(Views view: views_records){
 
+            PostMetadataEntity postMetadataEntity = postsMetadataService.findById(view.getPostID());
+
+            long postCurrentViewCount = postMetadataEntity.getViewCount();
+            postMetadataEntity.setViewCount( postCurrentViewCount + view.getView_count());
+
+            postsMetadataService.index(postMetadataEntity);
+
+        }
+
+        LOGGER.info("post metadatas' view count is updated!");
     }
+}

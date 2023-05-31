@@ -37,39 +37,21 @@ public class Consumer {
         }
     }
 
-//
-//    @RabbitListener(queues = "view_count_queue")
-//    public ViewsResponse getViewsconsumeMQSerrverMessage() {
-//        List<Views> allViews = new ArrayList<>();
-//        try {
-//            setProperties();
-//            String action = "getViewsAction";
-//            Class c = properties.getCmdMap().get(action);
-//            Object obj = c.getConstructor().newInstance();
-//            Method execute = c.getMethod("execute");
-//            allViews = (List<Views>) execute.invoke(obj);
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//
-//        LOGGER.info(String.format("Request Received from MQ server => %s", allViews));
-//        return new ViewsResponse(allViews);
-//    }
-//
-//    @RabbitListener(queues = "post_views_queue")
-//    public void updateViewsconsumeMQSerrverMessage(UpdateViewCountRequest req) {
-//        try {
-//            setProperties();
-//            String action = "UpdateViewsAction";
-//            Class c = properties.getCmdMap().get(action);
-//            Object obj = c.getConstructor().newInstance();
-//            Method execute = c.getMethod("execute", String.class);
-//            execute.invoke(obj, req.getPostMetadataId());
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//
-//        LOGGER.info(String.format("Request Received from MQ server and updated"));
-//    }
+
+    @RabbitListener(queues = "post_views_queue")
+    public void updateViewsconsumeMQSerrverMessage(UpdateViewCountRequest req) {
+        try {
+            setProperties();
+            String action = "UpdateViewsAction";
+            Class c = properties.getCmdMap().get(action);
+            Object obj = c.getConstructor().newInstance();
+            Method execute = c.getMethod("execute", String.class);
+            execute.invoke(obj, req.getPostMetadataId());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        LOGGER.info(String.format("Request Received from MQ server and updated"));
+    }
 
 }
