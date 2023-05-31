@@ -1,4 +1,4 @@
-package DataClasses;
+package com.example.views.DataClasses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

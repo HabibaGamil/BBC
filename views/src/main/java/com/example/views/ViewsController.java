@@ -1,6 +1,8 @@
 package com.example.views;
 
+import com.example.views.RabbitMQ.Producer;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,8 +11,10 @@ import java.util.List;
 @RequestMapping("/views")
 @AllArgsConstructor
 public class ViewsController {
-    private final ViewService viewService;
 
+    @Autowired
+    private final ViewService viewService;
+private Producer producer;
     @GetMapping
     public List<Views> fetchAllViews(){
         return viewService.getAllViews();
@@ -34,5 +38,11 @@ public class ViewsController {
 
     }
 
+
+    @PostMapping("/publish_views")
+    public void publishViews(){
+        producer.broadcastCurrentViewsCount();
+//        viewService.publishViews();
+    }
 
 }

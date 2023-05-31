@@ -1,4 +1,4 @@
-package config;
+package com.example.views.config;
 
 public class CustomClassLoader extends ClassLoader{
     byte [] bytes;

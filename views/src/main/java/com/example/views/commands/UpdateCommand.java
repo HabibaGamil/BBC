@@ -1,14 +1,11 @@
-package commands;
+package com.example.views.commands;
 
 
-import DataClasses.ViewsResponse;
 import com.example.views.ViewService;
-import com.example.views.Views;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.List;
 
 @NoArgsConstructor
 public class UpdateCommand {

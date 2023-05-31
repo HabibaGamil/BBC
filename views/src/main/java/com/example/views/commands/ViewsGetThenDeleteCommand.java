@@ -1,6 +1,5 @@
-package commands;
+package com.example.views.commands;
 
-import DataClasses.ViewsResponse;
 import com.example.views.ViewService;
 import com.example.views.Views;
 import lombok.NoArgsConstructor;

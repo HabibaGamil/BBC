@@ -1,16 +1,25 @@
 package com.example.views;
 
+
+import com.example.views.RabbitMQ.Producer;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+//import com.example.views.RabbitMQ.Producer;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicReference;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class ViewService {
-    private final ViewsRepository viewsRepository;
+    @Autowired
+    private  ViewsRepository viewsRepository;
+    private Producer producer;
     public List<Views> getAllViews(){
         return viewsRepository.findAll();
     }
@@ -51,6 +60,13 @@ public class ViewService {
     }
     public void deleteAllViews(){
         viewsRepository.deleteAll();
+    }
+
+
+    public void publishViews() {
+        System.out.println("da5alt hena? ");
+        producer.broadcastCurrentViewsCount();
+
     }
 
 }

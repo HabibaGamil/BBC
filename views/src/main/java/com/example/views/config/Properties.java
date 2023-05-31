@@ -1,4 +1,4 @@
-package config;
+package com.example.views.config;
 
 import lombok.Getter;
 import lombok.Setter;

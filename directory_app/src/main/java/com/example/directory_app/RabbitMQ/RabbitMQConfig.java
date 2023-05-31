@@ -36,7 +36,7 @@ public class RabbitMQConfig {
     @Bean
     public Queue directoryApp_newsfeedDirAppQueue(){
 
-        return new Queue("newsfeed_dir");
+        return new Queue("newsfeed_dir_queue");
     }
 
     // spring bean for exchange

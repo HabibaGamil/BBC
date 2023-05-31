@@ -1,4 +1,4 @@
-package RabbitMQ;
+package com.example.views.RabbitMQ;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,9 +29,9 @@ public class RabbitMQConfig {
     private Map<String, String> queueMap;
 
 
-    @Value("${view_count_exchange}")
+    @Value("view_count_exchange")
     private String exchange;
-    @Value("${post_views_exchange}")
+    @Value("post_views_exchange")
     private String exchangeforPost;
 
     ///////////////////////// Queues Beans /////////////////

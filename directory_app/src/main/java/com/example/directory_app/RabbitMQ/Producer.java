@@ -53,6 +53,7 @@ public class Producer {
         SearchResponse response = rabbitTemplate
                 .convertSendAndReceiveAsType(newsfeedExchange, routingKey, req, new ParameterizedTypeReference<>() {});
 
+//        rabbitTemplate.converands
         LOGGER.info(String.format("Response", response));
 
         return response;
