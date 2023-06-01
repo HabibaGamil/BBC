@@ -30,9 +30,9 @@ public class MQServerController {
 
     @RequestMapping({"{app}/{requestParams}"})
 
-    public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse) {
+    public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse, @RequestBody Map<String, Object> reqBody) {
 
-        Request request = new Request(requestParams,headers);
+        Request request = new Request(requestParams, reqBody, headers);
         Response response = null;
         try
         {

@@ -10,16 +10,15 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-
 public class Request {
 String command;
 Map<String, Object> body;
 Map<String,String> header;
 
-public Request(String command,Map<String,String> header )
+public Request(String command,Map<String, Object> body,Map<String,String> header)
 {
     this.command = command;
     this.header = header;
+    this.body = body;
 }
 }

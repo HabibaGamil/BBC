@@ -2,13 +2,11 @@ package com.example.post_mongo;
 
 
 
-import com.example.post_mongo.config.Config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 
-import com.example.post_mongo.config.Properties;
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +17,14 @@ import org.springframework.web.bind.annotation.*;
 @EnableAutoConfiguration
 @RestController
 @RequestMapping("/api")
-@AllArgsConstructor
+//@AllArgsConstructor
 public class postController {
 
     public postController(){
 
     }
 
-    @Autowired
+    /*@Autowired
     Config config;
     Properties properties;
 
@@ -36,7 +34,10 @@ public class postController {
         Properties properties = new Properties(config.getMsg(), config.getCmdMap());
         String jsonStr = ow.writeValueAsString(properties);
         return jsonStr;
-    }
+    }*/
+
+
+
 
     /*@GetMapping("/article")
     public List<Article> fetchAllArticles(){
