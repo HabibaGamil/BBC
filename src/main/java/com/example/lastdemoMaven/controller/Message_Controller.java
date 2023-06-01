@@ -16,11 +16,17 @@ public class Message_Controller {
     }
 
 
-    @GetMapping("/sending_request")
-    public ResponseEntity<String> send_message(){
+    @GetMapping("/sending_most_viewed_request")
+    public ResponseEntity<String> send_most_viewed_message(){
         the_producer.send_most_viewed_message();
+        return ResponseEntity.ok("most view message sent to rabbitMQ");
+    }
+
+    @GetMapping("/sending_most_recent_request")
+    public ResponseEntity<String> send_most_recent_message(){
         the_producer.send_most_recent_message();
-        return ResponseEntity.ok("message sent to rabbitMQ");
+
+        return ResponseEntity.ok("most recent message sent to rabbitMQ");
     }
 
     @GetMapping("/test")
