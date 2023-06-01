@@ -20,6 +20,7 @@
 		<module>apiGatewayServer</module>
 		<module>controller</module>
 		<module>mqServer</module>
+		<module>demo-app</module>
 
 	</modules>
 	<name>BBC</name>
