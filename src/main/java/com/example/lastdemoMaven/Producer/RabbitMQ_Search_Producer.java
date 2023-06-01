@@ -31,29 +31,29 @@ public class RabbitMQ_Search_Producer {
     }
 
     public void send_most_viewed_message(){
-       SearchRequest message_request_categories = new SearchRequest(true,0,number_of_posts);
+       SearchRequest message_request_categories = new SearchRequest(true,0,null,number_of_posts);
        SearchResponse response_containing_categories= rabbittemplate.convertSendAndReceiveAsType(exchange, routing_key, message_request_categories,new ParameterizedTypeReference<SearchResponse>(){});
         assert response_containing_categories != null;
         search_service.update_cache(response_containing_categories);
-       SearchRequest message_request_sub_categories = new SearchRequest(true,1,number_of_posts);
+       SearchRequest message_request_sub_categories = new SearchRequest(true,1,null,number_of_posts);
        SearchResponse response_containing_sub_categories= rabbittemplate.convertSendAndReceiveAsType(exchange, routing_key, message_request_sub_categories,new ParameterizedTypeReference<SearchResponse>(){});
         assert response_containing_sub_categories != null;
         search_service.update_cache(response_containing_sub_categories);
-       SearchRequest message_request_topics = new SearchRequest(true,2,number_of_posts);
+       SearchRequest message_request_topics = new SearchRequest(true,2,null,number_of_posts);
        SearchResponse response_containing_topics= rabbittemplate.convertSendAndReceiveAsType(exchange, routing_key, message_request_topics,new ParameterizedTypeReference<SearchResponse>(){});
         assert response_containing_topics != null;
         search_service.update_cache(response_containing_topics);
     }
     public void send_most_recent_message(){
-        SearchRequest message_request_categories = new SearchRequest(false,0,number_of_posts);
+        SearchRequest message_request_categories = new SearchRequest(false,0,null,number_of_posts);
         SearchResponse response_containing_categories= rabbittemplate.convertSendAndReceiveAsType(exchange, routing_key, message_request_categories,new ParameterizedTypeReference<SearchResponse>(){});
         assert response_containing_categories != null;
         search_service.update_cache(response_containing_categories);
-        SearchRequest message_request_sub_categories = new SearchRequest(false,1,number_of_posts);
+        SearchRequest message_request_sub_categories = new SearchRequest(false,1,null,number_of_posts);
         SearchResponse response_containing_sub_categories= rabbittemplate.convertSendAndReceiveAsType(exchange, routing_key, message_request_sub_categories,new ParameterizedTypeReference<SearchResponse>(){});
         assert response_containing_sub_categories != null;
         search_service.update_cache(response_containing_sub_categories);
-        SearchRequest message_request_topics = new SearchRequest(false,2,number_of_posts);
+        SearchRequest message_request_topics = new SearchRequest(false,2,null,number_of_posts);
         SearchResponse response_containing_topics= rabbittemplate.convertSendAndReceiveAsType(exchange, routing_key, message_request_topics,new ParameterizedTypeReference<SearchResponse>(){});
         assert response_containing_topics != null;
         search_service.update_cache(response_containing_topics);

@@ -16,6 +16,7 @@ import java.util.List;
 public class SearchRequest implements Serializable {
     private boolean most_viewed;
     private int type;
+    private List<String> ids;
     private int number_of_posts;
 }
 
