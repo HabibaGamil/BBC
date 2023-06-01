@@ -84,7 +84,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>bbc/controller</name>
+						<name>bbc1/controller</name>
 					</image>
 				</configuration>
 			</plugin>

@@ -8,10 +8,10 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.eurekaServer</groupId>
-	<artifactId>eurekaServer</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>eurekaserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eurekaServer</name>
+	<name>eurekaserver</name>
 	<description>Eureka Server for BBC</description>
 	<properties>
 		<java.version>17</java.version>
@@ -56,7 +56,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>bbc/eurekaserver</name>
+						<name>bbc1/${project.artifactId}</name>
 					</image>
 				</configuration>
 			</plugin>
