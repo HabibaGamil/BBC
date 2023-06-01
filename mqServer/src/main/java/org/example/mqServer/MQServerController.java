@@ -54,6 +54,7 @@ public class MQServerController {
     public Response handler(@RequestBody Map<String, Object> body,@PathVariable String requestParameters,@PathVariable String app,
                                        @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse)
     {
+        System.out.println("In MQ server ");
         Request request = new Request(requestParameters,body,headers);
         Response response = null;
         try

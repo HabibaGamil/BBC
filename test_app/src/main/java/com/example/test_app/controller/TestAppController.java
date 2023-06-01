@@ -13,6 +13,7 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
@@ -26,11 +27,13 @@ import java.util.HashMap;
 
 @RestController
 @EnableAutoConfiguration
-@RefreshScope // important
 public class TestAppController {
     private Producer producer;
     @Autowired
      Config config;
+
+     @Value("${testapp.msg}")
+     String message;
      Properties properties ;
      RabbitTemplate rabbitTemplate;
      @Autowired
@@ -38,6 +41,7 @@ public class TestAppController {
 
     @GetMapping("/app/properties")
     public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
+        System.out.println(message);
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         Properties properties = new Properties(config.getMsg(),config.getCmdMap(),config.getModifiableClasses());
         String jsonStr = ow.writeValueAsString(properties);

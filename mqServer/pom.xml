@@ -90,7 +90,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>mqServerApp</name>
+                        <name>mq-server-app</name>
                     </image>
                 </configuration>
             </plugin>
