@@ -6,14 +6,12 @@ import com.example.directory_app.RabbitMQ.Producer;
 import com.example.directory_app.config.Config;
 import com.example.directory_app.config.Properties;
 import com.example.directory_app.entities.PostMetadataEntity;
-import com.example.directory_app.repositories.PostMetadataRepository;
 import com.example.directory_app.search.SearchRequestDTO;
 import com.example.directory_app.services.PostMetadataService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.AllArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.web.bind.annotation.*;
@@ -62,15 +60,9 @@ public class PostMetadataController {
     }
 
     @PostMapping("/search/queue")
-//    @CachePut(value = "searchTerms", key = "#dto.searchTerm + ' ' + #dto.fields")
     public SearchResponse search_newsfeed_queue(@RequestBody final SearchRequest req) throws IOException {
         return producer.sendMessageToSendPostsToNewsfeed(req);
     }
-//
-//    @PostMapping("/search/queue")
-////    @CachePut(value = "searchTerms", key = "#dto.searchTerm + ' ' + #dto.fields")
-//    public void directory_viewCount_queue(@RequestBody final SearchRequest req) throws IOException {
-//        return producer.sendMessageToSendPostsToNewsfeed(req);
-//    }
+
 
 }

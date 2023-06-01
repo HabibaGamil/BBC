@@ -15,34 +15,38 @@ public class ViewsController {
 
     @Autowired
     private final ViewService viewService;
-private Producer producer;
+    private Producer producer;
+
     @GetMapping
-    public List<Views> fetchAllViews(){
+    public List<Views> fetchAllViews() {
         return viewService.getAllViews();
 
     }
 
-    record NewRequest(String postID){}
+    record NewRequest(String postID) {
+    }
+
     @PostMapping
-    public void updateView(@RequestBody NewRequest request){
+    public void updateView(@RequestBody NewRequest request) {
         viewService.createOrEditViews(request.postID);
 
     }
+
     @GetMapping("/{postID}")
-    public Views getAViews(@PathVariable("postID") String postId ){
+    public Views getAViews(@PathVariable("postID") String postId) {
         return viewService.getAViews(postId);
 
     }
 
     @DeleteMapping("/{postID}")
-    public void deleteAViews(@PathVariable("postID") String postId ){
+    public void deleteAViews(@PathVariable("postID") String postId) {
         viewService.deleteAViews(postId);
 
     }
 
-    @Scheduled(fixedRate=600000)
+    @Scheduled(fixedRate = 600000)
     @PostMapping("/publish_views")
-    public void publishViews(){
+    public void publishViews() {
         producer.broadcastCurrentViewsCount();
     }
 

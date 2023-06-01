@@ -2,10 +2,6 @@ package com.example.directory_app.RabbitMQ;
 
 import com.example.directory_app.DataClasses.SearchRequest;
 import com.example.directory_app.DataClasses.SearchResponse;
-import com.example.directory_app.DataClasses.UpdateViewCountEvent;
-import com.example.directory_app.DataClasses.ViewsResponse;
-import com.example.directory_app.entities.PostMetadataEntity;
-import com.example.directory_app.entities.Views;
 import com.example.directory_app.services.PostMetadataService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @EnableAutoConfiguration

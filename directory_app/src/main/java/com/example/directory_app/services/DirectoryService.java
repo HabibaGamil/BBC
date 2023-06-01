@@ -25,6 +25,7 @@ private final TopicRepository topicRepository;
 public Iterable<CategoryEntity> findAllCategories() {
     return categoryRepository.findAll();
 }
+
 public CategoryEntity findCategoryById(final String id) {
         return categoryRepository.findById(id).orElse(null);
     }
@@ -33,6 +34,7 @@ public CategoryEntity findCategoryById(final String id) {
 public Iterable<SubcategoryEntity> findAllSubcategories() {
     return subcategoryRepository.findAll();
 }
+
 public SubcategoryEntity findSubcategoryById(final String id) {
         return subcategoryRepository.findById(id).orElse(null);
 }
@@ -41,6 +43,7 @@ public SubcategoryEntity findSubcategoryById(final String id) {
 public Iterable<TopicEntity> findAllTopics() {
     return topicRepository.findAll();
 }
+
 public TopicEntity findTopicById(final String id) {
         return topicRepository.findById(id).orElse(null);
     }

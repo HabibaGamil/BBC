@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@RefreshScope // important
+@RefreshScope
 @Configuration
 @Component
 @ConfigurationProperties(prefix = "directoryapp")

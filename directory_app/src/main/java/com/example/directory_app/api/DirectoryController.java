@@ -22,7 +22,6 @@ public class DirectoryController {
     @Autowired
     private DirectoryService directoryService;
 
-
     @GetMapping("/categories")
     public Iterable<CategoryEntity> findAllCategories() {
         return directoryService.findAllCategories();

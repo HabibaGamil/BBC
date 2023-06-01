@@ -30,20 +30,30 @@ public class RabbitMQConfig {
 
 
     @Value("newsfeed_dir_exchange")
-    private String exchange;
+    private String newsfeed_dir_exchange;
+
+    @Value("view_count_exchange")
+    private String view_dir_exchange;
+
 
     ///////////////////////// Queues Beans /////////////////
     @Bean
     public Queue directoryApp_newsfeedDirAppQueue(){
-
         return new Queue("newsfeed_dir_queue");
+    }
+
+    @Bean
+    public Queue viewsDirQueue(){
+        return new Queue("view_count_dir_queue");
     }
 
     // spring bean for exchange
     @Bean
     public TopicExchange exchange(){
-        return new TopicExchange(exchange);
+        return new TopicExchange(newsfeed_dir_exchange);
     }
+
+
 
     // spring bean for binding between exchange and queue using routing key //
     @Bean

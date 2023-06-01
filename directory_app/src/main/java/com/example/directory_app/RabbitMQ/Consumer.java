@@ -3,12 +3,10 @@ package com.example.directory_app.RabbitMQ;
 import com.example.directory_app.DataClasses.SearchRequest;
 import com.example.directory_app.DataClasses.SearchResponse;
 import com.example.directory_app.DataClasses.ViewsBroadcastRequest;
-import com.example.directory_app.DataClasses.ViewsResponse;
 import com.example.directory_app.config.Config;
 import com.example.directory_app.config.Properties;
 import com.example.directory_app.entities.PostMetadataEntity;
 import com.example.directory_app.entities.Views;
-import com.example.directory_app.search.PageRequestDTO;
 import com.example.directory_app.search.SearchRequestDTO;
 import com.example.directory_app.services.PostMetadataService;
 import org.slf4j.Logger;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @Configuration
@@ -57,33 +54,38 @@ public class Consumer {
 
     @RabbitListener(queues = "newsfeed_dir_queue")
     public  SearchResponse consumeMQServerMessage(SearchRequest request){
-        List<PostMetadataEntity> postMetadataEntities = new ArrayList<>();
+        List<List<PostMetadataEntity>> postMetadataEntities = new ArrayList<>();
+
+        List<String> categoryIds= request.getIds();
 
         try {
-            SearchRequestDTO dto = SearchRequestDTO.builder()
-                    .searchTerm((request.getIds()==null)? "": request.getIds().toString())
-                    .fields(List.of(type_mappings.get(request.getType())))
-                    .sortBy(request.isMost_viewed()?"viewCount":"date")
-                    .build();
-            dto.setPage(0);
-            dto.setSize(request.getNumber_of_posts());
+            for(int i=0; i<categoryIds.size();i++) {
+                SearchRequestDTO dto = SearchRequestDTO.builder()
+                        .searchTerm((request.getIds() == null) ? "" : request.getIds().get(i))
+                        .fields(List.of(type_mappings.get(request.getType())))
+                        .sortBy(request.isMost_viewed() ? "viewCount" : "date")
+                        .build();
+                dto.setPage(0);
+                dto.setSize(request.getNumber_of_posts());
 
 
-            setProperties();
+                setProperties();
 
-            Class c= properties.getCmdMap().get("searchAction");
+                Class c = properties.getCmdMap().get("searchAction");
 
-            Object obj = c.getConstructor().newInstance();
-            autowireCapableBeanFactory.autowireBean(obj);
-            Method execute = c.getDeclaredMethod("execute", SearchRequestDTO.class);
-            postMetadataEntities = (List<PostMetadataEntity>) execute.invoke(obj, dto);
+                Object obj = c.getConstructor().newInstance();
+                autowireCapableBeanFactory.autowireBean(obj);
+                Method execute = c.getDeclaredMethod("execute", SearchRequestDTO.class);
+                List<PostMetadataEntity> postMetadataEntities_sub = (List<PostMetadataEntity>) execute.invoke(obj, dto);
+                postMetadataEntities.add(postMetadataEntities_sub);
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
 
         SearchResponse searchResponse = SearchResponse.builder()
                 .most_viewed(request.isMost_viewed())
-                .ids(postMetadataEntities.stream().map(PostMetadataEntity::getPostMetadataId).collect(Collectors.toList()))
+                .ids(categoryIds)
                 .type(request.getType())
                 .number_of_posts(postMetadataEntities.size())
                 .metadata(postMetadataEntities)

@@ -18,5 +18,5 @@ public class SearchResponse {
     private int type;
     private List<String> ids;
     private int number_of_posts;
-    private List<PostMetadataEntity> metadata;
+    private List<List<PostMetadataEntity>> metadata;
 }

@@ -15,7 +15,6 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.xcontent.XContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +38,7 @@ public class PostMetadataService {
     private final RestHighLevelClient client;
 
     // save postmetadata
-    //save and index are the same but implemented differently
+    // save and index are the same but implemented differently
     public Boolean index(final PostMetadataEntity postsMetadataEntity) {
         try {
             final String postMetadataAsString = MAPPER.writeValueAsString(postsMetadataEntity);
@@ -67,8 +66,8 @@ public class PostMetadataService {
         postMetadataRepository.deleteById(id);
     }
 
-//    get postmetadata that belong to the same categoryId/subcategoryId/topic
-//    + include pagination( restrict number of posts retrieved + should be sorted)
+    //    get postmetadata that belong to the same categoryId/subcategoryId/topic
+    //    + include pagination( restrict number of posts retrieved + should be sorted)
     public List<PostMetadataEntity> search(final SearchRequestDTO dto) throws IOException {
         final SearchRequest request = SearchUtil.buildSearchRequest(POSTS_METADATA_INDEX, dto);
 

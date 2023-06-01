@@ -26,13 +26,7 @@ public class Properties {
             Class <?> c = Class.forName("com.example.springbootelasticsearch.commands."+className);
             cmdMap.put(key,c);
         }
-        //Use this if you want to implement modifiable classes
 
-//        for (String key : modifiableClassesInput.keySet()){
-//            String className= cmdMapInput.get(key);
-//            Class <?> c = Class.forName("com.example.test_app.commands."+className);
-//            modifiableClasses.put(key,c);
-//        }
     }
     public void addCommand (String action, Class c){
         cmdMap.put(action,c);
