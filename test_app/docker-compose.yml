@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  test_app:
+    image: bbc1/testapp:latest
+    mem_limit: 700m
+    ports:
+      - ${TEST_APP_PORT}:8091
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+
+networks:
+  default:
+    name: bbc

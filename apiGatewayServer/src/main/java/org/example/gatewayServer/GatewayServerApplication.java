@@ -25,7 +25,7 @@ public class GatewayServerApplication {
                         .path("/bbc/test/**")
                         .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
                                 .addResponseHeader("X-Response-Time",new Date().toString()))
-                        .uri("lb://mqserver"))
+                        .uri("lb://testapp"))
                  .route(p -> p
                         .path("/bbc/post/**")
                         .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")

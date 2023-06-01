@@ -10,9 +10,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>configServer</artifactId>
+	<artifactId>configserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>configServer</name>
+	<name>configserver</name>
 	<packaging>jar</packaging>
 	<description>Configuration Server for BBC</description>
 	<properties>
@@ -53,7 +53,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>bbc/configserver</name>
+						<name>bbc1/${project.artifactId}</name>
 					</image>
 				</configuration>
 			</plugin>

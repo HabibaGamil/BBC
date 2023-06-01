@@ -17,6 +17,8 @@ services:
       - "8070:8070"
     networks:
       - bbc-network
+    depends_on:
+      - configServer
 
   apiGatewayServer:
     image: bbc1/apigatewayserver:latest
@@ -25,6 +27,11 @@ services:
       - "8072:8072"
     networks:
       - bbc-network
+    depends_on:
+      - configServer
+      - eurekaServer
+      - test_app
+      - controller
 
   controller:
     image: bbc1/controller:latest
@@ -33,13 +40,20 @@ services:
       - "8000:8000"
     networks:
       - bbc-network
-      -
-  test_app:
-    image: bbc1/testapp:latest
-    mem_limit: 700m
-    ports:
-      - "8091:8091"
-    networks:
-      - bbc-network
+    depends_on:
+      - configServer
+      - eurekaServer
+
+#  test_app:
+#    image: bbc1/testapp:latest
+#    mem_limit: 700m
+#    ports:
+#      - "8091:8091"
+#    networks:
+#      - bbc-network
+#    depends_on:
+#      - configServer
+#      - eurekaServer
+#      - controller
 networks:
   bbc-network:
