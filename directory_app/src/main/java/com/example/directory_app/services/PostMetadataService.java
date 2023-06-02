@@ -93,11 +93,15 @@ public class PostMetadataService {
     }
 
     public Iterable<PostMetadataEntity> findAll() {
+
+        LOG.info("get all post metadata in directory");
         return postMetadataRepository.findAll();
     }
 
 
     public PostMetadataEntity findById(final String id) {
+        LOG.info("get all post metadata by id");
+
         return postMetadataRepository.findById(id).orElse(null);
     }
 }
