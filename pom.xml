@@ -13,10 +13,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>search_app</module>
-		<module>directory_app</module>
-		<module>views_app</module>
-		<module>test_app</module>
+		<module>Apps/search_app</module>
+		<module>Apps/directory_app</module>
+		<module>Apps/views_app</module>
+		<module>Apps/test_app</module>
 		<module>configServer</module>
 		<module>eurekaserver</module>
 		<module>apiGatewayServer</module>
