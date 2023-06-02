@@ -6,7 +6,10 @@ import com.example.test_app.config.Properties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import org.springframework.amqp.core.Message;
+
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,10 @@ import java.lang.reflect.Method;
 @RestController
 @EnableAutoConfiguration
 @RefreshScope // important
+@Slf4j
 public class TestAppController {
+
+    public static final Logger logger = LoggerFactory.getLogger(TestAppController.class);
      @Autowired
      Config config;
      Properties properties ;
@@ -33,6 +39,7 @@ public class TestAppController {
 
     @GetMapping("/app/properties")
     public String getPropertyDetails() throws JsonProcessingException, ClassNotFoundException {
+        logger.info("get property details");
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         Properties properties = new Properties(config.getMsg(),config.getCmdMap(),config.getModifiableClasses());
         String jsonStr = ow.writeValueAsString(properties);
