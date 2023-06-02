@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>views</artifactId>
+	<artifactId>views_app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>views</name>
 	<description>views microservice for Spring Boot</description>

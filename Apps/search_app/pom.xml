@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBootElasticSearch</artifactId>
+    <artifactId>search_app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringBootElasticSearch</name>
     <description>SpringBootElasticSearch</description>
