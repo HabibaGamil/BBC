@@ -28,10 +28,11 @@ public class MQServerController {
     @Autowired
     Environment environment;
 
-    @RequestMapping({"{app}/{requestParams}"})
-    public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse, @RequestBody String body) {
+    @GetMapping({"{app}/{requestParams}"})
 
-        Request request = new Request(requestParams,headers, body);
+    public Response getHandler(@PathVariable String requestParams, @PathVariable String app, @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse) {
+
+        Request request = new Request(requestParams,headers);
         Response response = null;
         try
         {
@@ -53,6 +54,7 @@ public class MQServerController {
     public Response handler(@RequestBody Map<String, Object> body,@PathVariable String requestParameters,@PathVariable String app,
                                        @RequestHeader Map<String, String> headers, HttpServletResponse servletResponse)
     {
+        System.out.println("In MQ server ");
         Request request = new Request(requestParameters,body,headers);
         Response response = null;
         try
