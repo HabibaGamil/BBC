@@ -119,5 +119,7 @@ The ViewsApp provides the following endpoints:
 * `POST /api/views`: Saves a view for a post.
 * `DELETE /api/views/{id}`: Deletes a view by ID.
 * `POST /api/views/publish_views`: Publishes a message on the queue for directory and search. This updates the records in directory and search and then deletes its records.
+ 
+***
 
-
+work documentation [here] (https://docs.google.com/document/d/1Jv8HhPOCEqj_thccbLFl6S44yQH1g84pkvIfNckCTqI/edit?usp=sharing)
