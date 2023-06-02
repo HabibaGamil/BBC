@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +20,16 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+@EnableAutoConfiguration
+@RestController
+@RequestMapping("/api")
 @AllArgsConstructor
 public class addAllArticlesCommand {
 
     @Autowired
     private final postService postService;
 
+    @PostMapping("/add")
     public void execute() throws FileNotFoundException {
         File file = new File("C:\\Users\\ASUS\\Desktop\\post_mongo\\src\\main\\resources\\articleDoc.json");
         InputStream inputStream = new FileInputStream(file);

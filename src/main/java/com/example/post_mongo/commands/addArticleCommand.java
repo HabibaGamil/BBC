@@ -5,6 +5,7 @@ import com.example.post_mongo.MediaServer;
 import com.example.post_mongo.postService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-
+@EnableAutoConfiguration
+@RestController
+@RequestMapping("/api")
 @AllArgsConstructor
 public class addArticleCommand {
 
     @Autowired
     private final postService postService;
 
-
+    @PostMapping("/addArticle")
     public Article execute(@RequestBody Article post) {
         ArrayList<String> imagesUrl = new ArrayList<String>();
         ArrayList<String> imagesIds = new ArrayList<String>();
