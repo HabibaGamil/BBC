@@ -13,4 +13,4 @@ BBC Replica for Architecture of Massively Scalable Apps Course
 
 Note: each app code is in its own branch with its ReadMe file on the services it provides and how to run it.
 
-
+load testing documents: https://drive.google.com/drive/folders/1CRLNShxbNLXgZCoz6EflRJ4WN2WR28s5?usp=sharing
