@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "2fea050e-35b7-480e-9f15-20d2f4ad80fb",
+		"name": "Generate service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17463138"
+	},
+	"item": [
+		{
+			"name": "viewTest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{postGenerate}}/api/view/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{postGenerate}}",
+					"path": [
+						"api",
+						"view",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subscriptionTest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{postGenerate}}/api/subscription/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{postGenerate}}",
+					"path": [
+						"api",
+						"subscription",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostsTest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{postGenerate}}/api/posts/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{postGenerate}}",
+					"path": [
+						"api",
+						"posts",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMostViewed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{postGenerate}}/api/search/mostViewed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{postGenerate}}",
+					"path": [
+						"api",
+						"search",
+						"mostViewed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchMostRecent",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{postGenerate}}/api/search/mostRecent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{postGenerate}}",
+					"path": [
+						"api",
+						"search",
+						"mostRecent"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "postGenerate",
+			"value": "8081"
+		}
+	]
+}

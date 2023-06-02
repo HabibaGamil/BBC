@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "5df6e791-66c0-4823-a207-e8cbd524b6b5",
+		"name": "Feed Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17463138"
+	},
+	"item": [
+		{
+			"name": "HomePageAction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{feedPort}}/bbc/newsfeed/HomePageAction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{feedPort}}",
+					"path": [
+						"bbc",
+						"newsfeed",
+						"HomePageAction"
+					]
+				},
+				"description": "get the home page posts of a user with user Id = userId"
+			},
+			"response": []
+		},
+		{
+			"name": "CategoryAction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"categoryId\":\"4\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{feedPort}}/bbc/newsfeed/CategoryAction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{feedPort}}",
+					"path": [
+						"bbc",
+						"newsfeed",
+						"CategoryAction"
+					]
+				},
+				"description": "get posts of the category with id = categoryId"
+			},
+			"response": []
+		},
+		{
+			"name": "SubCategoryAction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"subCategoryId\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{feedPort}}/bbc/newsfeed/SubCategoryAction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{feedPort}}",
+					"path": [
+						"bbc",
+						"newsfeed",
+						"SubCategoryAction"
+					]
+				},
+				"description": "get posts of the subcategory with id = subCategoryId"
+			},
+			"response": []
+		},
+		{
+			"name": "TopicAction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"topicId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:{{feedPort}}/bbc/newsfeed/TopicAction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{feedPort}}",
+					"path": [
+						"bbc",
+						"newsfeed",
+						"TopicAction"
+					]
+				},
+				"description": "get posts of the topic with id = topicId"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "feedPort",
+			"value": "8082"
+		}
+	]
+}
