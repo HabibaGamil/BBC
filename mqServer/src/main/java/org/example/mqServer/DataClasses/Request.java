@@ -20,14 +20,9 @@ String command;
 Map<String, Object> body;
 Map<String,String> header;
 
-public Request(String command,Map<String,String> header, String body )  {
+public Request(String command,Map<String,String> header )  {
     this.command = command;
     this.header = header;
-    ObjectMapper objectMapper = new ObjectMapper();
-    try {
-        this.body = objectMapper.readValue(body, new TypeReference<Map<String, Object>>() {});
-    } catch (JsonProcessingException e) {
-        e.printStackTrace();
-    }
+
 }
 }
