@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  cassandra:
+      image: cassandra:latest
+      container_name: cassandra
+      networks:
+        - cassandra_network
+      ports:
+        - "9042:9042"
+      environment:
+        - "MAX_HEAP_SIZE=256M"
+        - "HEAP_NEWSIZE=128M"
+      volumes:
+        - ./out/cassandra_data:/var/lib/cassandra
+
+  cassandra-load-keyspace:
+      container_name: cassandra-load-keyspace
+      image: cassandra:latest
+      depends_on:
+        - cassandra
+      networks:
+        - cassandra_network
+      volumes:
+        - ./cassandra_schema.cql:/schema.cql 
+      command: /bin/bash -c "sleep 120 && echo loading cassandra keyspace && cqlsh cassandra -f /schema.cql"
+      
+networks:
+  cassandra_network:
