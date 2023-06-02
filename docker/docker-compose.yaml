@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   grafana:
-    image: "grafana/grafana:latest"
+    image: "grafana/grafana:8.2.7"
     ports:
       - "3000:3000"
     environment:
@@ -26,6 +26,12 @@ services:
 #      - "9411:9411"
 #    networks:
 #      - bbc
+
+  # deploymentServer:
+  #   image: bbc1/deploymentserver:latest
+  #   mem_limit: 700m
+  #   ports:
+  #     - "8060:8060"
 
   configServer:
     image: bbc1/configserver:latest
@@ -88,26 +94,6 @@ services:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
-
-  # testapp:
-  #   image: bbc1/testapp:latest
-  #   mem_limit: 700m
-  #   ports:
-  #     - "8091:8091"
-  #   depends_on:
-  #     - configServer
-  #     - eurekaServer
-  #     - controller
-  #   deploy:
-  #     restart_policy:
-  #       condition: on-failure
-  #       delay: 45s
-  #       max_attempts: 3
-  #       window: 180s
-  #   environment:
-  #     SPRING_PROFILES_ACTIVE: default
-  #     SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
-  #     EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
 
   demoapp:
     image: bbc1/demoapp:latest

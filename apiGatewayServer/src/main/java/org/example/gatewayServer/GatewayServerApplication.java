@@ -22,10 +22,10 @@ public class GatewayServerApplication {
     public RouteLocator myRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p
-                        .path("/bbc/test/**")
+                        .path("/bbc/demo/**")
                         .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
                                 .addResponseHeader("X-Response-Time",new Date().toString()))
-                        .uri("lb://testapp"))
+                        .uri("lb://demoapp"))
                  .route(p -> p
                         .path("/bbc/post/**")
                         .filters(f -> f.rewritePath("/bbc/(?<segment>.*)","/${segment}")
@@ -47,6 +47,5 @@ public class GatewayServerApplication {
                                 .addResponseHeader("X-Response-Time",new Date().toString()))
                         .uri("lb://mqserver"))
                   .build();
-
     }
 }

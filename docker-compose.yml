@@ -30,8 +30,8 @@ services:
     depends_on:
       - configServer
       - eurekaServer
-      - test_app
       - controller
+  
 
   controller:
     image: bbc1/controller:latest

@@ -21,6 +21,7 @@
 		<module>controller</module>
 		<module>mqServer</module>
 		<module>demo-app</module>
+		<module>deploymentServer</module>
 
 	</modules>
 	<name>BBC</name>
