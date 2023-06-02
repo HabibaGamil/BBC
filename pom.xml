@@ -13,9 +13,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>SpringBootElasticSearch</module>
+		<module>search_app</module>
 		<module>directory_app</module>
-		<module>views</module>
+		<module>views_app</module>
 		<module>test_app</module>
 		<module>configServer</module>
 		<module>eurekaserver</module>
