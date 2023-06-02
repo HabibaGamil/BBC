@@ -1,14 +1,41 @@
-# BBC
-BBC Replica for Architecture of Massively Scalable Apps Course
+## Logging Server Setup
 
-## Miniservices Implemented
--User App <br>
--Post App <br>
--Media APP <br>
--Search App <br>
--Directory App <br>
--Views App <br>
--Newfeed Generator App <br>
--Newsfeed App <br>
+To enable logging server in your app, please add the following dependencies to your project:
 
-Note: each app code is in its own branch with its ReadMe file on the services it provides and how to run it.
+```
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-tracing</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-observation</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-tracing-bridge-brave</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>io.zipkin.reporter2</groupId>
+    <artifactId>zipkin-reporter-brave</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+After adding these dependencies, you need to run Zipkin through Docker using the following command:
+```
+docker run -d -p 9411:9411 openzipkin/zipkin
+```
+Finally, you can access the Zipkin UI by navigating to localhost:9411 in your web browser
