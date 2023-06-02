@@ -34,6 +34,11 @@ To enable logging server in your app, please add the following dependencies to y
 </dependency>
 ```
 
+Add this line to you application.properties file:
+```
+management.tracing.sampling.probability=1.0
+```
+
 After adding these dependencies, you need to run Zipkin through Docker using the following command:
 ```
 docker run -d -p 9411:9411 openzipkin/zipkin
