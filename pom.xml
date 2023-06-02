@@ -17,6 +17,7 @@
 		<module>Apps/directory_app</module>
 		<module>Apps/views_app</module>
 		<module>Apps/test_app</module>
+		<module>Apps/user_app</module>
 		<module>configServer</module>
 		<module>eurekaserver</module>
 		<module>apiGatewayServer</module>
