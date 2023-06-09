@@ -12,14 +12,13 @@ Following microservices cross cutting patterns, we implemented a central configu
 Eureka Server contains all the information regarding the deployed instances of all the apps in our application. Load balancers use the eureka server to balance the traffic fairly over the available instances of the app. Any new instance deployed in the system automatically registers with the eureka server.
 
 ## Controller
+The controller acts as a remote control for the system. It administers apps remotely through the a dedicated message queue for each type of app. App instances of a misroservice listen to the controller in a publish subscribe fashion. App Logic is implemented based on the Command Pattern and the controller has the ability to add/update/delete an app command at runtime. Apps recieve controller commands through the message queue. The controller command might contain parametrs such as bytecode sent to an app to update a certain behavior/command using java class loaders.
 
 ## MQ Server
 For our project it was required that apps receive user requests through a dedicated message queue rather than through HTTP protocal. The MQ server acts as an intermediary between the API gateway and the apps by placing the user request in the correct meassage queue for processing.
 
 ## API Gateway
 API Gateway acts as a single entry point to the system. It uses the Eureka server to load balance in the undelying MQ servers. 
-
-
 
 ## Logging server
 The logging server is a centralized location where all apps logs are kept.
