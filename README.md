@@ -1,5 +1,6 @@
 # BBC Newsfeed Website Replica
 This repository represent out project for "Architecture of Massively Scalable Apps" Course. We implemented a bbc replica based on microservice architecture and design patterns.
+<br/>
 ![Alt text](https://github.com/HabibaGamil/BBC/assets/75835933/a14c0404-c1f8-4492-8bd6-d5bca548b7ec)
 
 # System Components
