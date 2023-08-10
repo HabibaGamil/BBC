@@ -34,13 +34,21 @@ The deployement server is responsible for deploying new instances of our system 
 ## Miniservices Implemented
 
 ### User App 
+This app has an associated SQL database that keeps user account info and recieves user requests such as login, logout, register. Users of type admin had privilages to edit website data such as editors picks and categories.
 ### Post App 
+This app has an associated database of BBC posts. It recieves admin requests to add new articles as well as user requests to retrieve an post.
 ### Media APP 
+This is the associated blob store which saves media such as photos included in BBC articles and videos. It recieves requests to retrieve media content post authentication of a request.
 ### Search App 
+This app uses ElasticSearch database to store article metadata (title, summary, keywords) and efficiently query user text search requests. 
 ### Directory App 
+This app maintains a view of categorized clustered by category, within each category articles are sorted by views. It also uses ElasticSearch to build those indexes. The directory app is internally used by the newsfeed generator app to get information such as the newest or most popular articles to be added to users newsfeeds
 ### Views App 
+The views app is a log that logs user views on posts and their history. The search app periodically updates its article view counts from the views app's log. A separate app was created to record user views as its extremely write intensive so as not to affect the search apps performance.
 ### Newfeed Generator App 
+This app has an associated database of users and their preferences. It generates newsfeeds based on groupings of user preferences and caches them for newsfeed app requests. User preferences are also periodically updated from the views apps logs.
 ### Newsfeed App 
+This app recieves user newsfeed requests. It returns one of the pregenerated customized newsfeeds from the cache.
 
 Note: each app code is in its own branch with its ReadMe file on the services it provides and how to run it.
 
